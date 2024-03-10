@@ -35,8 +35,8 @@ const Bio = () => {
       <StaticImage
         className="bio-avatar"
         layout="fixed"
-        formats={["auto", "webp", "avif"]}
-        src="../images/profile-pic.png"
+        formats={["auto", "webp", "avif", "png"]}
+        src="https://avatars.githubusercontent.com/u/94180099?v=4"
         width={50}
         height={50}
         quality={95}
@@ -44,11 +44,12 @@ const Bio = () => {
       />
       {author?.name && (
         <p>
-          Written by <strong>{author.name}</strong> {author?.summary || null}
+          {/* Written by <strong>{author.name}</strong> {author?.summary || null}
           {` `}
           <a href={`https://twitter.com/${social?.twitter || ``}`}>
             You should follow them on Twitter
-          </a>
+          </a> */}
+          기술을 문제 해결의 도구로 사용하는 개발자 <strong>{author.name}</strong> 입니다.
         </p>
       )}
     </div>
