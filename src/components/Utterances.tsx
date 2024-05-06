@@ -15,7 +15,7 @@ const Utterances: React.FC<IUtterancesProps> = React.memo(() => {
       src: 'https://utteranc.es/client.js',
       repo: 'thumbzzero/thumbzzero.github.io',
       theme: 'preferred-color-scheme',
-      'issue-term': 'pathname',
+      'issue-term': 'title',
       label: '✨💬 comments ✨',
       crossOrigin: 'anonymous',
       async: 'true',
