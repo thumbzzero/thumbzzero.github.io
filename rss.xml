@@ -1,4 +1,174 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Blog RSS Feed]]></title><description><![CDATA[개발 기록]]></description><link>https://thumbzzero.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Mon, 06 May 2024 07:48:22 GMT</lastBuildDate><item><title><![CDATA[모바일 사파리 hydration 오류]]></title><description><![CDATA[회사 홈페이지 new 버전을 개발하는 업무를 맡게 되어 개발 및 deploy를 마쳤을 때 발견하게 된 이슈이다. 로컬에서 개발을 완료한 뒤 문제가 없음을 확인하고, deploy가 완료된 상태였는데 갑자기 버그 제보 채널로부터 아래와 같은 Runtime…]]></description><link>https://thumbzzero.github.io/02-모바일 사파리 hydration 오류/</link><guid isPermaLink="false">https://thumbzzero.github.io/02-모바일 사파리 hydration 오류/</guid><pubDate>Sun, 28 Apr 2024 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;회사 홈페이지 new 버전을 개발하는 업무를 맡게 되어 개발 및 deploy를 마쳤을 때 발견하게 된 이슈이다.&lt;/p&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Blog RSS Feed]]></title><description><![CDATA[개발 기록]]></description><link>https://thumbzzero.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Wed, 07 Aug 2024 23:24:38 GMT</lastBuildDate><item><title><![CDATA[Express + TypeScript 프로젝트 세팅]]></title><description><![CDATA[npm init 터미널에 을 실행한 뒤 터미널에 뜨는 각종 정보(ex. 프로젝트명, description, 라이선스 등)를 입력한다. default…]]></description><link>https://thumbzzero.github.io/03-Express + TypeScript 프로젝트 세팅/</link><guid isPermaLink="false">https://thumbzzero.github.io/03-Express + TypeScript 프로젝트 세팅/</guid><pubDate>Thu, 08 Aug 2024 00:00:00 GMT</pubDate><content:encoded>&lt;h3&gt;npm init&lt;/h3&gt;
+&lt;p&gt;터미널에 &lt;code class=&quot;language-text&quot;&gt;npm init&lt;/code&gt;을 실행한 뒤 터미널에 뜨는 각종 정보(ex. 프로젝트명, description, 라이선스 등)를 입력한다.&lt;br&gt;
+default 값을 사용하고 싶은 경우에는 그냥 &lt;code class=&quot;language-text&quot;&gt;Enter&lt;/code&gt;를 치면 된다!&lt;br&gt;
+모두 입력을 마치면 입력한 정보를 기반으로 &lt;code class=&quot;language-text&quot;&gt;package.json&lt;/code&gt; 파일이 생성된다.&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;npm init --yes&lt;/code&gt;를 입력하면 각종 정보 입력하는 과정은 스킵하고 default 값으로 바로 생성이 된다.&lt;br&gt;
+(물론 나중에 수정이 가능하다.)&lt;/p&gt;
+&lt;h3&gt;TypeScript 설치&lt;/h3&gt;
+&lt;p&gt;TypeScript가 이미 설치되어 있으면 생략이 가능하다.&lt;br&gt;
+&lt;code class=&quot;language-text&quot;&gt;tsc -v&lt;/code&gt; 명령어를 실행해서 설치 여부를 확인한 뒤 설치가 필요한 경우 &lt;code class=&quot;language-text&quot;&gt;npm i -g typescript&lt;/code&gt; 명령어를 통해 설치한다.&lt;/p&gt;
+&lt;h3&gt;tsc --init&lt;/h3&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;tsc --init&lt;/code&gt; 명령어를 실행한다.&lt;br&gt;
+실행하고 나면 &lt;code class=&quot;language-text&quot;&gt;tsconfig.json&lt;/code&gt;이라는 파일이 생성된다.&lt;/p&gt;
+&lt;p&gt;기본으로 생성된 파일 내용에서 설정하고 싶은 값들을 수정해 주면 된다.&lt;br&gt;
+값에 대한 설명은 주석으로 적혀 있으니 참고하면 된다.&lt;br&gt;
+설정해 준 값의 예시로&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;json&quot;&gt;&lt;pre class=&quot;language-json&quot;&gt;&lt;code class=&quot;language-json&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;&quot;outDir&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;./build&quot;&lt;/span&gt;                                   &lt;span class=&quot;token comment&quot;&gt;/* Specify an output folder for all emitted files. */&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;outDir&lt;/code&gt; 값은 컴파일된 JavaScript 파일이 저장되는 디렉토리를 설정하는 값이다.
+위와 같이 설정할 경우 컴파일된 JavaScript 파일이 build 폴더 안에 저장된다.&lt;/p&gt;
+&lt;h5&gt;전체 파일 내용&lt;/h5&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;json&quot;&gt;&lt;pre class=&quot;language-json&quot;&gt;&lt;code class=&quot;language-json&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;&quot;compilerOptions&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;/* Visit https://aka.ms/tsconfig to read more about this file */&lt;/span&gt;
+
+    &lt;span class=&quot;token comment&quot;&gt;/* Projects */&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// &quot;incremental&quot;: true,                              /* Save .tsbuildinfo files to allow for incremental compilation of projects. */&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// &quot;composite&quot;: true,                                /* Enable constraints that allow a TypeScript project to be used with project references. */&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// &quot;tsBuildInfoFile&quot;: &quot;./.tsbuildinfo&quot;,              /* Specify the path to .tsbuildinfo incremental compilation file. */&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// &quot;disableSourceOfProjectReferenceRedirect&quot;: true,  /* Disable preferring source files instead of declaration files when referencing composite projects. */&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// &quot;disableSolutionSearching&quot;: true,                 /* Opt a project out of multi-project reference checking when editing. */&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// &quot;disableReferencedProjectLoad&quot;: true,             /* Reduce the number of projects loaded automatically by TypeScript. */&lt;/span&gt;
+
+    &lt;span class=&quot;token comment&quot;&gt;/* Language and Environment */&lt;/span&gt;
+    &lt;span class=&quot;token property&quot;&gt;&quot;target&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;es2016&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;                                  &lt;span class=&quot;token comment&quot;&gt;/* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// &quot;lib&quot;: [],                                        /* Specify a set of bundled library declaration files that describe the target runtime environment. */&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// &quot;jsx&quot;: &quot;preserve&quot;,                                /* Specify what JSX code is generated. */&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// &quot;experimentalDecorators&quot;: true,                   /* Enable experimental support for legacy experimental decorators. */&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// &quot;emitDecoratorMetadata&quot;: true,                    /* Emit design-type metadata for decorated declarations in source files. */&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// &quot;jsxFactory&quot;: &quot;&quot;,                                 /* Specify the JSX factory function used when targeting React JSX emit, e.g. &apos;React.createElement&apos; or &apos;h&apos;. */&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// &quot;jsxFragmentFactory&quot;: &quot;&quot;,                         /* Specify the JSX Fragment reference used for fragments when targeting React JSX emit e.g. &apos;React.Fragment&apos; or &apos;Fragment&apos;. */&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// &quot;jsxImportSource&quot;: &quot;&quot;,                            /* Specify module specifier used to import the JSX factory functions when using &apos;jsx: react-jsx*&apos;. */&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// &quot;reactNamespace&quot;: &quot;&quot;,                             /* Specify the object invoked for &apos;createElement&apos;. This only applies when targeting &apos;react&apos; JSX emit. */&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// &quot;noLib&quot;: true,                                    /* Disable including any library files, including the default lib.d.ts. */&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// &quot;useDefineForClassFields&quot;: true,                  /* Emit ECMAScript-standard-compliant class fields. */&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// &quot;moduleDetection&quot;: &quot;auto&quot;,                        /* Control what method is used to detect module-format JS files. */&lt;/span&gt;
+
+    &lt;span class=&quot;token comment&quot;&gt;/* Modules */&lt;/span&gt;
+    &lt;span class=&quot;token property&quot;&gt;&quot;module&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;commonjs&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;                                &lt;span class=&quot;token comment&quot;&gt;/* Specify what module code is generated. */&lt;/span&gt;
+     &lt;span class=&quot;token property&quot;&gt;&quot;rootDir&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;./&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;                                  &lt;span class=&quot;token comment&quot;&gt;/* Specify the root folder within your source files. */&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// &quot;moduleResolution&quot;: &quot;node10&quot;,                     /* Specify how TypeScript looks up a file from a given module specifier. */&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// &quot;baseUrl&quot;: &quot;./&quot;,                                  /* Specify the base directory to resolve non-relative module names. */&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// &quot;paths&quot;: {},                                      /* Specify a set of entries that re-map imports to additional lookup locations. */&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// &quot;rootDirs&quot;: [],                                   /* Allow multiple folders to be treated as one when resolving modules. */&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// &quot;typeRoots&quot;: [],                                  /* Specify multiple folders that act like &apos;./node_modules/@types&apos;. */&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// &quot;types&quot;: [],                                      /* Specify type package names to be included without being referenced in a source file. */&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// &quot;allowUmdGlobalAccess&quot;: true,                     /* Allow accessing UMD globals from modules. */&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// &quot;moduleSuffixes&quot;: [],                             /* List of file name suffixes to search when resolving a module. */&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// &quot;allowImportingTsExtensions&quot;: true,               /* Allow imports to include TypeScript file extensions. Requires &apos;--moduleResolution bundler&apos; and either &apos;--noEmit&apos; or &apos;--emitDeclarationOnly&apos; to be set. */&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// &quot;resolvePackageJsonExports&quot;: true,                /* Use the package.json &apos;exports&apos; field when resolving package imports. */&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// &quot;resolvePackageJsonImports&quot;: true,                /* Use the package.json &apos;imports&apos; field when resolving imports. */&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// &quot;customConditions&quot;: [],                           /* Conditions to set in addition to the resolver-specific defaults when resolving imports. */&lt;/span&gt;
+     &lt;span class=&quot;token property&quot;&gt;&quot;resolveJsonModule&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;                        &lt;span class=&quot;token comment&quot;&gt;/* Enable importing .json files. */&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// &quot;allowArbitraryExtensions&quot;: true,                 /* Enable importing files with any extension, provided a declaration file is present. */&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// &quot;noResolve&quot;: true,                                /* Disallow &apos;import&apos;s, &apos;require&apos;s or &apos;&amp;lt;reference&gt;&apos;s from expanding the number of files TypeScript should add to a project. */&lt;/span&gt;
+
+    &lt;span class=&quot;token comment&quot;&gt;/* JavaScript Support */&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// &quot;allowJs&quot;: true,                                  /* Allow JavaScript files to be a part of your program. Use the &apos;checkJS&apos; option to get errors from these files. */&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// &quot;checkJs&quot;: true,                                  /* Enable error reporting in type-checked JavaScript files. */&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// &quot;maxNodeModuleJsDepth&quot;: 1,                        /* Specify the maximum folder depth used for checking JavaScript files from &apos;node_modules&apos;. Only applicable with &apos;allowJs&apos;. */&lt;/span&gt;
+
+    &lt;span class=&quot;token comment&quot;&gt;/* Emit */&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// &quot;declaration&quot;: true,                              /* Generate .d.ts files from TypeScript and JavaScript files in your project. */&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// &quot;declarationMap&quot;: true,                           /* Create sourcemaps for d.ts files. */&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// &quot;emitDeclarationOnly&quot;: true,                      /* Only output d.ts files and not JavaScript files. */&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// &quot;sourceMap&quot;: true,                                /* Create source map files for emitted JavaScript files. */&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// &quot;inlineSourceMap&quot;: true,                          /* Include sourcemap files inside the emitted JavaScript. */&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// &quot;outFile&quot;: &quot;./&quot;,                                  /* Specify a file that bundles all outputs into one JavaScript file. If &apos;declaration&apos; is true, also designates a file that bundles all .d.ts output. */&lt;/span&gt;
+     &lt;span class=&quot;token property&quot;&gt;&quot;outDir&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;./build&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;                                   &lt;span class=&quot;token comment&quot;&gt;/* Specify an output folder for all emitted files. */&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// &quot;removeComments&quot;: true,                           /* Disable emitting comments. */&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// &quot;noEmit&quot;: true,                                   /* Disable emitting files from a compilation. */&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// &quot;importHelpers&quot;: true,                            /* Allow importing helper functions from tslib once per project, instead of including them per-file. */&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// &quot;downlevelIteration&quot;: true,                       /* Emit more compliant, but verbose and less performant JavaScript for iteration. */&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// &quot;sourceRoot&quot;: &quot;&quot;,                                 /* Specify the root path for debuggers to find the reference source code. */&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// &quot;mapRoot&quot;: &quot;&quot;,                                    /* Specify the location where debugger should locate map files instead of generated locations. */&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// &quot;inlineSources&quot;: true,                            /* Include source code in the sourcemaps inside the emitted JavaScript. */&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// &quot;emitBOM&quot;: true,                                  /* Emit a UTF-8 Byte Order Mark (BOM) in the beginning of output files. */&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// &quot;newLine&quot;: &quot;crlf&quot;,                                /* Set the newline character for emitting files. */&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// &quot;stripInternal&quot;: true,                            /* Disable emitting declarations that have &apos;@internal&apos; in their JSDoc comments. */&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// &quot;noEmitHelpers&quot;: true,                            /* Disable generating custom helper functions like &apos;__extends&apos; in compiled output. */&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// &quot;noEmitOnError&quot;: true,                            /* Disable emitting files if any type checking errors are reported. */&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// &quot;preserveConstEnums&quot;: true,                       /* Disable erasing &apos;const enum&apos; declarations in generated code. */&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// &quot;declarationDir&quot;: &quot;./&quot;,                           /* Specify the output directory for generated declaration files. */&lt;/span&gt;
+
+    &lt;span class=&quot;token comment&quot;&gt;/* Interop Constraints */&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// &quot;isolatedModules&quot;: true,                          /* Ensure that each file can be safely transpiled without relying on other imports. */&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// &quot;verbatimModuleSyntax&quot;: true,                     /* Do not transform or elide any imports or exports not marked as type-only, ensuring they are written in the output file&apos;s format based on the &apos;module&apos; setting. */&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// &quot;isolatedDeclarations&quot;: true,                     /* Require sufficient annotation on exports so other tools can trivially generate declaration files. */&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// &quot;allowSyntheticDefaultImports&quot;: true,             /* Allow &apos;import x from y&apos; when a module doesn&apos;t have a default export. */&lt;/span&gt;
+    &lt;span class=&quot;token property&quot;&gt;&quot;esModuleInterop&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;                             &lt;span class=&quot;token comment&quot;&gt;/* Emit additional JavaScript to ease support for importing CommonJS modules. This enables &apos;allowSyntheticDefaultImports&apos; for type compatibility. */&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// &quot;preserveSymlinks&quot;: true,                         /* Disable resolving symlinks to their realpath. This correlates to the same flag in node. */&lt;/span&gt;
+    &lt;span class=&quot;token property&quot;&gt;&quot;forceConsistentCasingInFileNames&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;            &lt;span class=&quot;token comment&quot;&gt;/* Ensure that casing is correct in imports. */&lt;/span&gt;
+
+    &lt;span class=&quot;token comment&quot;&gt;/* Type Checking */&lt;/span&gt;
+    &lt;span class=&quot;token property&quot;&gt;&quot;strict&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;                                      &lt;span class=&quot;token comment&quot;&gt;/* Enable all strict type-checking options. */&lt;/span&gt;
+     &lt;span class=&quot;token property&quot;&gt;&quot;noImplicitAny&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;                            &lt;span class=&quot;token comment&quot;&gt;/* Enable error reporting for expressions and declarations with an implied &apos;any&apos; type. */&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// &quot;strictNullChecks&quot;: true,                         /* When type checking, take into account &apos;null&apos; and &apos;undefined&apos;. */&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// &quot;strictFunctionTypes&quot;: true,                      /* When assigning functions, check to ensure parameters and the return values are subtype-compatible. */&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// &quot;strictBindCallApply&quot;: true,                      /* Check that the arguments for &apos;bind&apos;, &apos;call&apos;, and &apos;apply&apos; methods match the original function. */&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// &quot;strictPropertyInitialization&quot;: true,             /* Check for class properties that are declared but not set in the constructor. */&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// &quot;noImplicitThis&quot;: true,                           /* Enable error reporting when &apos;this&apos; is given the type &apos;any&apos;. */&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// &quot;useUnknownInCatchVariables&quot;: true,               /* Default catch clause variables as &apos;unknown&apos; instead of &apos;any&apos;. */&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// &quot;alwaysStrict&quot;: true,                             /* Ensure &apos;use strict&apos; is always emitted. */&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// &quot;noUnusedLocals&quot;: true,                           /* Enable error reporting when local variables aren&apos;t read. */&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// &quot;noUnusedParameters&quot;: true,                       /* Raise an error when a function parameter isn&apos;t read. */&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// &quot;exactOptionalPropertyTypes&quot;: true,               /* Interpret optional property types as written, rather than adding &apos;undefined&apos;. */&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// &quot;noImplicitReturns&quot;: true,                        /* Enable error reporting for codepaths that do not explicitly return in a function. */&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// &quot;noFallthroughCasesInSwitch&quot;: true,               /* Enable error reporting for fallthrough cases in switch statements. */&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// &quot;noUncheckedIndexedAccess&quot;: true,                 /* Add &apos;undefined&apos; to a type when accessed using an index. */&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// &quot;noImplicitOverride&quot;: true,                       /* Ensure overriding members in derived classes are marked with an override modifier. */&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// &quot;noPropertyAccessFromIndexSignature&quot;: true,       /* Enforces using indexed accessors for keys declared using an indexed type. */&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// &quot;allowUnusedLabels&quot;: true,                        /* Disable error reporting for unused labels. */&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// &quot;allowUnreachableCode&quot;: true,                     /* Disable error reporting for unreachable code. */&lt;/span&gt;
+
+    &lt;span class=&quot;token comment&quot;&gt;/* Completeness */&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// &quot;skipDefaultLibCheck&quot;: true,                      /* Skip type checking .d.ts files that are included with TypeScript. */&lt;/span&gt;
+    &lt;span class=&quot;token property&quot;&gt;&quot;skipLibCheck&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;                                 &lt;span class=&quot;token comment&quot;&gt;/* Skip type checking all .d.ts files. */&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;express 설치&lt;/h3&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;npm install express
+npm install -D @types/express&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;nodemon 설치&lt;/h3&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;npm i nodemon --save-dev&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;nodemon은 코드 저장 시 자동으로 재실행하기 위해 설치한다.&lt;/p&gt;
+&lt;h3&gt;/src/app.ts&lt;/h3&gt;
+&lt;p&gt;소스코드는 src 디렉토리 내에서 모두 관리하기 위해 src 디렉토리 아래에 app.ts를 생성해 주었다.&lt;/p&gt;
+&lt;h3&gt;package.json 수정&lt;/h3&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;json&quot;&gt;&lt;pre class=&quot;language-json&quot;&gt;&lt;code class=&quot;language-json&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;&quot;main&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;src/app.ts&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;&quot;scripts&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token property&quot;&gt;&quot;test&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;echo \&quot;Error: no test specified\&quot; &amp;amp;&amp;amp; exit 1&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token property&quot;&gt;&quot;compile&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;tsc &amp;amp;&amp;amp; node ./build/src/app.js&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token property&quot;&gt;&quot;start&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;nodemon -e ts --exec \&quot;npm run compile\&quot;&quot;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;main&lt;/code&gt;값은 최초 실행 파일을 의미한다.
+저렇게 설정할 경우 src/app.ts가 실행되며,
+app.ts를 src가 아닌 최상단에 설정한 경우에는 &lt;code class=&quot;language-text&quot;&gt;app.ts&lt;/code&gt;라고만 작성하면 된다.&lt;/p&gt;
+&lt;p&gt;그리고 위와 같이 &lt;code class=&quot;language-text&quot;&gt;scripts&lt;/code&gt;를 지정해 준다.
+서버를 실행할 때는 &lt;code class=&quot;language-text&quot;&gt;npm start&lt;/code&gt; 명령어를 사용하면 실행이 되며, 저장을 할 때마다 nodemon이 새로 컴파일을 해준다.&lt;br&gt;
+(※ 이 역시 프로젝트 최상단의 app.ts를 실행하고자 하는 경우에는&lt;br&gt;
+&lt;code class=&quot;language-text&quot;&gt;&quot;compile&quot;: &quot;tsc &amp;amp;&amp;amp; node ./build/app.js&quot;&lt;/code&gt;로 수정해 준다.)&lt;/p&gt;
+&lt;h3&gt;gitingore 설정&lt;/h3&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;# dependencies
+/node_modules
+
+# production
+/build
+
+.DS_Store
+*.idea
+
+.env&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;프로젝트 최상단에 &lt;strong&gt;.gitignore&lt;/strong&gt; 파일을 생성한 뒤 git에서 변경사항을 추적하지 않을 파일을 추가해 준다.&lt;/p&gt;
+&lt;p&gt;설치한 모듈의 코드가 들어있는 &lt;strong&gt;/node_module&lt;/strong&gt;,&lt;br&gt;
+컴파일된 파일이 저장된 &lt;strong&gt;/build&lt;/strong&gt;,&lt;br&gt;
+그리고 macOS 사용자는 &lt;strong&gt;.DS_Store&lt;/strong&gt; (maxOS에서 자동 생성),&lt;br&gt;
+WebStorm 등 JetBrains IDE 사용 중이라면 *&lt;strong&gt;.idea&lt;/strong&gt;(IDE에서 자동 생성하는 프로젝트별 설정값 저장 폴더)도 추가해 준다.&lt;/p&gt;
+&lt;p&gt;또, 환경 변수를 관리할 .env 파일도 추가한다.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[모바일 사파리 hydration 오류]]></title><description><![CDATA[회사 홈페이지 new 버전을 개발하는 업무를 맡게 되어 개발 및 deploy를 마쳤을 때 발견하게 된 이슈이다. 로컬에서 개발을 완료한 뒤 문제가 없음을 확인하고, deploy가 완료된 상태였는데 갑자기 버그 제보 채널로부터 아래와 같은 Runtime…]]></description><link>https://thumbzzero.github.io/02-모바일 사파리 hydration 오류/</link><guid isPermaLink="false">https://thumbzzero.github.io/02-모바일 사파리 hydration 오류/</guid><pubDate>Sun, 28 Apr 2024 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;회사 홈페이지 new 버전을 개발하는 업무를 맡게 되어 개발 및 deploy를 마쳤을 때 발견하게 된 이슈이다.&lt;/p&gt;
 &lt;p&gt;로컬에서 개발을 완료한 뒤 문제가 없음을 확인하고, deploy가 완료된 상태였는데 갑자기 버그 제보 채널로부터 아래와 같은 Runtime Error가 발생한다는 제보를 받았다.&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;b&gt;Unhandled Runtime Error&lt;/b&gt;&lt;br&gt;
