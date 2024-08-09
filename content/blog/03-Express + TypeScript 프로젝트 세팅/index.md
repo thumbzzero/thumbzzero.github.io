@@ -198,7 +198,7 @@ app.ts를 src가 아닌 최상단에 설정한 경우에는 `app.ts`라고만 �
 
 설치한 모듈의 코드가 들어있는 **/node_module**,  
 컴파일된 파일이 저장된 **/build**,  
-그리고 macOS 사용자는 **.DS_Store** (maxOS에서 자동 생성),  
+그리고 macOS 사용자는 **.DS_Store** (macOS에서 자동 생성),  
 WebStorm 등 JetBrains IDE 사용 중이라면 ***.idea**(IDE에서 자동 생성하는 프로젝트별 설정값 저장 폴더)도 추가해 준다.
 
 또, 환경 변수를 관리할 .env 파일도 추가한다.
