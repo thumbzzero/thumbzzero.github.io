@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Blog RSS Feed]]></title><description><![CDATA[개발 기록]]></description><link>https://thumbzzero.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Fri, 09 Aug 2024 14:26:14 GMT</lastBuildDate><item><title><![CDATA[Express + TypeScript 프로젝트 세팅]]></title><description><![CDATA[npm init 터미널에 을 실행한 뒤 터미널에 뜨는 각종 정보(ex. 프로젝트명, description, 라이선스 등)를 입력한다. default…]]></description><link>https://thumbzzero.github.io/03-Express + TypeScript 프로젝트 세팅/</link><guid isPermaLink="false">https://thumbzzero.github.io/03-Express + TypeScript 프로젝트 세팅/</guid><pubDate>Thu, 08 Aug 2024 00:00:00 GMT</pubDate><content:encoded>&lt;h3&gt;npm init&lt;/h3&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Blog RSS Feed]]></title><description><![CDATA[개발 기록]]></description><link>https://thumbzzero.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Sat, 10 Aug 2024 09:44:40 GMT</lastBuildDate><item><title><![CDATA[Express + TypeScript 프로젝트 세팅]]></title><description><![CDATA[npm init 터미널에 을 실행한 뒤 터미널에 뜨는 각종 정보(ex. 프로젝트명, description, 라이선스 등)를 입력한다. default…]]></description><link>https://thumbzzero.github.io/03-Express + TypeScript 프로젝트 세팅/</link><guid isPermaLink="false">https://thumbzzero.github.io/03-Express + TypeScript 프로젝트 세팅/</guid><pubDate>Thu, 08 Aug 2024 00:00:00 GMT</pubDate><content:encoded>&lt;h3&gt;npm init&lt;/h3&gt;
 &lt;p&gt;터미널에 &lt;code class=&quot;language-text&quot;&gt;npm init&lt;/code&gt;을 실행한 뒤 터미널에 뜨는 각종 정보(ex. 프로젝트명, description, 라이선스 등)를 입력한다.&lt;br&gt;
 default 값을 사용하고 싶은 경우에는 그냥 &lt;code class=&quot;language-text&quot;&gt;Enter&lt;/code&gt;를 치면 된다!&lt;br&gt;
 모두 입력을 마치면 입력한 정보를 기반으로 &lt;code class=&quot;language-text&quot;&gt;package.json&lt;/code&gt; 파일이 생성된다.&lt;/p&gt;
@@ -152,7 +152,7 @@ app.ts를 src가 아닌 최상단에 설정한 경우에는 &lt;code class=&quot
 서버를 실행할 때는 &lt;code class=&quot;language-text&quot;&gt;npm start&lt;/code&gt; 명령어를 사용하면 실행이 되며, 저장을 할 때마다 nodemon이 새로 컴파일을 해준다.&lt;br&gt;
 (※ 이 역시 프로젝트 최상단의 app.ts를 실행하고자 하는 경우에는&lt;br&gt;
 &lt;code class=&quot;language-text&quot;&gt;&quot;compile&quot;: &quot;tsc &amp;amp;&amp;amp; node ./build/app.js&quot;&lt;/code&gt;로 수정해 준다.)&lt;/p&gt;
-&lt;h3&gt;gitingore 설정&lt;/h3&gt;
+&lt;h3&gt;gitignore 설정&lt;/h3&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;# dependencies
 /node_modules
 
