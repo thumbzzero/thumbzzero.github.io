@@ -181,7 +181,7 @@ app.ts를 src가 아닌 최상단에 설정한 경우에는 `app.ts`라고만 �
 `"compile": "tsc && node ./build/app.js"`로 수정해 준다.)
 
 
-### gitingore 설정
+### gitignore 설정
 ```
 # dependencies
 /node_modules
