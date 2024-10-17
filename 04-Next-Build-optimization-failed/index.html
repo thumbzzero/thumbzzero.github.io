@@ -4,9 +4,9 @@
 <p>Build optimization failed: found page without a React Component as default export in<br>
 pages/[발생 파일]</p>
 </blockquote>
-<p>위의 오류는 Next.js에서 <code class="language-text">pages</code> 디렉토리의 파일 중에 특정 파일이 React 컴포넌트를 <code class="language-text">export default</code>로 내보내지 않았을 때 발생한다.
+<p>위의 오류는 Next.js에서 <code class="language-text">pages</code> 디렉토리의 파일 중에 특정 파일이 <strong>React 컴포넌트</strong>를 <code class="language-text">export default</code>로 내보내지 않았을 때 발생한다.
 (*<strong>Pages Router</strong> 사용 시)</p>
-<p>Next.js에서는 <code class="language-text">pages</code> 디렉토리에서 <code class="language-text">export default</code>된 React 컴포넌트를 기반으로 라우팅을 처리하기 때문에 위와 같은 오류가 발생하면 오류가 발생한 파일이 React 컴포넌트를 <code class="language-text">export default</code>하고 있는지 확인이 필요하다.</p>
+<p>Next.js에서는 <code class="language-text">pages</code> 디렉토리에서 <code class="language-text">export default</code>된 <strong>React 컴포넌트</strong>를 기반으로 라우팅을 처리하기 때문에 위와 같은 오류가 발생하면 오류가 발생한 파일이 React 컴포넌트를 <code class="language-text">export default</code>하고 있는지 확인이 필요하다.</p>
 <p class="highlight">즉, pages 디렉토리 내의 모든 파일은 아래와 같은 형식이어야 한다.</p>
 <div class="gatsby-highlight" data-language="tsx"><pre class="language-tsx"><code class="language-tsx"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token function">Page</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">return</span> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span><span class="token plain-text">Page</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span><span class="token punctuation">;</span>
@@ -26,4 +26,4 @@ In Next.js, a page is a React Component exported from a .js, .jsx, .ts, or .tsx 
           >
             window.___chunkMapping="{\"app\":[\"/app-4139dcef80de781b473e.js\"],\"component---src-pages-404-js\":[\"/component---src-pages-404-js-c76f759449b7ac2e3392.js\"],\"component---src-pages-index-js\":[\"/component---src-pages-index-js-350e9b4aa85349fee1e3.js\"],\"component---src-pages-using-typescript-tsx\":[\"/component---src-pages-using-typescript-tsx-08405464d01c923fda06.js\"],\"component---src-templates-blog-post-js\":[\"/component---src-templates-blog-post-js-b994b5c53881a25831e5.js\"]}";
           </script>
-        <script>window.___webpackCompilationHash="6fd4c8910d86d5955b24";</script><script src="/webpack-runtime-6426e211e21e2bbe537d.js" async></script><script src="/framework-195f9a31e5a4e6cebf51.js" async></script><script src="/app-4139dcef80de781b473e.js" async></script><!-- slice-end id="_gatsby-scripts-1" --></body></html>
+        <script>window.___webpackCompilationHash="ce0e62fd379e8ca9cc04";</script><script src="/webpack-runtime-6426e211e21e2bbe537d.js" async></script><script src="/framework-195f9a31e5a4e6cebf51.js" async></script><script src="/app-4139dcef80de781b473e.js" async></script><!-- slice-end id="_gatsby-scripts-1" --></body></html>
