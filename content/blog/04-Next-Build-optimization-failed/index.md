@@ -9,10 +9,10 @@ Next.js로 개발 중이던 프로젝트를 `npm run build` 커맨드를 이용�
 > Build optimization failed: found page without a React Component as default export in  
 > pages/[발생 파일]
 
-위의 오류는 Next.js에서 `pages` 디렉토리의 파일 중에 특정 파일이 React 컴포넌트를 `export default`로 내보내지 않았을 때 발생한다.
+위의 오류는 Next.js에서 `pages` 디렉토리의 파일 중에 특정 파일이 **React 컴포넌트**를 `export default`로 내보내지 않았을 때 발생한다.
 (***Pages Router** 사용 시)
   
-Next.js에서는 `pages` 디렉토리에서 `export default`된 React 컴포넌트를 기반으로 라우팅을 처리하기 때문에 위와 같은 오류가 발생하면 오류가 발생한 파일이 React 컴포넌트를 `export default`하고 있는지 확인이 필요하다.
+Next.js에서는 `pages` 디렉토리에서 `export default`된 **React 컴포넌트**를 기반으로 라우팅을 처리하기 때문에 위와 같은 오류가 발생하면 오류가 발생한 파일이 React 컴포넌트를 `export default`하고 있는지 확인이 필요하다.
 
 <p class="highlight">즉, pages 디렉토리 내의 모든 파일은 아래와 같은 형식이어야 한다.</p>
 
