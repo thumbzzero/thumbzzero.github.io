@@ -69,7 +69,9 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
   const { createNodeField } = actions
 
   if (node.internal.type === `MarkdownRemark`) {
-    const value = createFilePath({ node, getNode })
+    const filePath = createFilePath({ node, getNode })
+    // Strip leading numeric prefix (e.g. /01-some-post/ → /some-post/)
+    const value = filePath.replace(/\/\d+-/, `/`)
 
     createNodeField({
       name: `slug`,
