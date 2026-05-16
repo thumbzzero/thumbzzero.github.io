@@ -245,7 +245,7 @@ a:focus {
 }
 
 .global-wrapper[data-is-root-path="true"] .bio {
-  margin-bottom: var(--spacing-20);
+  margin-bottom: var(--spacing-10);
 }
 
 .global-header {
@@ -282,6 +282,42 @@ a:focus {
   font-family: var(--font-heading);
   text-decoration: none;
   font-size: var(--fontSize-2);
+}
+
+.search-wrapper {
+  margin-bottom: var(--spacing-8);
+}
+
+.search-input {
+  width: 100%;
+  padding: var(--spacing-3) var(--spacing-4);
+  border: 1.5px solid var(--color-accent);
+  border-radius: 6px;
+  font-family: var(--font-heading);
+  font-size: var(--fontSize-1);
+  color: var(--color-text);
+  background: transparent;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.search-input::placeholder {
+  color: var(--color-text-light);
+}
+
+.search-input:focus {
+  border-color: var(--color-primary);
+}
+
+.search-input::-webkit-search-cancel-button {
+  cursor: pointer;
+  opacity: 0.5;
+}
+
+.search-empty {
+  color: var(--color-text-light);
+  font-family: var(--font-heading);
+  font-size: var(--fontSize-1);
 }
 
 .bio {
