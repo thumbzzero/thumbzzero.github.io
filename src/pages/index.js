@@ -9,19 +9,38 @@ const BlogIndex = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata?.title || `Title`
   const posts = data.allMarkdownRemark.nodes
   const [query, setQuery] = React.useState("")
+  const [selectedTags, setSelectedTags] = React.useState([])
 
-  const filteredPosts = query.trim()
-    ? posts.filter(post => {
-        const q = query.toLowerCase()
-        const title = (post.frontmatter.title || "").toLowerCase()
-        const description = (
-          post.frontmatter.description ||
-          post.excerpt ||
-          ""
-        ).toLowerCase()
-        return title.includes(q) || description.includes(q)
-      })
-    : posts
+  const allTags = React.useMemo(() => {
+    const tagSet = new Set()
+    posts.forEach(post => {
+      ;(post.frontmatter.tags || []).forEach(tag => tagSet.add(tag))
+    })
+    return Array.from(tagSet).sort()
+  }, [posts])
+
+  const toggleTag = tag => {
+    setSelectedTags(prev =>
+      prev.includes(tag) ? prev.filter(t => t !== tag) : [...prev, tag]
+    )
+  }
+
+  const filteredPosts = posts.filter(post => {
+    const q = query.toLowerCase().trim()
+    const matchesSearch =
+      !q ||
+      (post.frontmatter.title || "").toLowerCase().includes(q) ||
+      (post.frontmatter.description || post.excerpt || "")
+        .toLowerCase()
+        .includes(q)
+
+    const postTags = post.frontmatter.tags || []
+    const matchesTags =
+      selectedTags.length === 0 ||
+      selectedTags.every(tag => postTags.includes(tag))
+
+    return matchesSearch && matchesTags
+  })
 
   if (posts.length === 0) {
     return (
@@ -49,6 +68,20 @@ const BlogIndex = ({ data, location }) => {
           aria-label="Search posts"
         />
       </div>
+      {allTags.length > 0 && (
+        <div className="tag-filter">
+          <span className="tag-filter-label">Tags</span>
+          {allTags.map(tag => (
+            <button
+              key={tag}
+              className={`tag-filter-btn${selectedTags.includes(tag) ? " active" : ""}`}
+              onClick={() => toggleTag(tag)}
+            >
+              {tag}
+            </button>
+          ))}
+        </div>
+      )}
       <ol style={{ listStyle: `none` }}>
         {filteredPosts.length === 0 ? (
           <p className="search-empty">No posts match "{query}"</p>
@@ -70,6 +103,22 @@ const BlogIndex = ({ data, location }) => {
                       </Link>
                     </h2>
                     <small>{post.frontmatter.date}</small>
+                    {post.frontmatter.tags?.length > 0 && (
+                      <div className="post-tags">
+                        {post.frontmatter.tags.map(tag => (
+                          <button
+                            key={tag}
+                            className={`tag-pill${selectedTags.includes(tag) ? " active" : ""}`}
+                            onClick={e => {
+                              e.preventDefault()
+                              toggleTag(tag)
+                            }}
+                          >
+                            {tag}
+                          </button>
+                        ))}
+                      </div>
+                    )}
                   </header>
                   <section>
                     <p
@@ -115,6 +164,7 @@ export const pageQuery = graphql`
           date(formatString: "MMMM DD, YYYY")
           title
           description
+          tags
         }
       }
     }

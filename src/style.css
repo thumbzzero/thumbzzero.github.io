@@ -320,6 +320,99 @@ a:focus {
   font-size: var(--fontSize-1);
 }
 
+.tag-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-2);
+  margin-bottom: var(--spacing-8);
+}
+
+.tag-filter-label {
+  font-family: var(--font-heading);
+  font-size: var(--fontSize-0);
+  color: var(--color-text-light);
+  align-self: center;
+  margin-right: var(--spacing-1);
+  white-space: nowrap;
+}
+
+.tag-filter-btn {
+  padding: var(--spacing-1) var(--spacing-3);
+  border: 1.5px solid var(--color-accent);
+  border-radius: 999px;
+  background: transparent;
+  font-family: var(--font-heading);
+  font-size: var(--fontSize-0);
+  color: var(--color-text-light);
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+}
+
+.tag-filter-btn:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.tag-filter-btn.active {
+  border-color: var(--color-primary);
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.post-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-1);
+  margin-top: var(--spacing-2);
+}
+
+.tag-pill {
+  padding: 2px var(--spacing-2);
+  border: 1px solid var(--color-accent);
+  border-radius: 999px;
+  background: transparent;
+  font-family: var(--font-heading);
+  font-size: var(--fontSize-0);
+  color: var(--color-text-light);
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+}
+
+.tag-pill:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.tag-pill.active {
+  border-color: var(--color-primary);
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.tag-pill--static {
+  padding: 2px var(--spacing-2);
+  border: 1px solid var(--color-primary);
+  border-radius: 999px;
+  background: var(--color-primary);
+  font-family: var(--font-heading);
+  font-size: var(--fontSize-0);
+  color: #fff;
+  cursor: default;
+}
+
+.blog-post header p {
+  margin-bottom: var(--spacing-0);
+}
+
+.blog-post header .post-tags {
+  margin-top: var(--spacing-2);
+  margin-bottom: var(--spacing-0);
+}
+
+.blog-post header {
+  margin-bottom: var(--spacing-10);
+}
+
 .bio {
   display: flex;
   margin-bottom: var(--spacing-16);
