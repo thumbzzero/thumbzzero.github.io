@@ -1,4 +1,70 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Blog RSS Feed]]></title><description><![CDATA[개발 기록]]></description><link>https://thumbzzero.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Tue, 19 May 2026 12:53:27 GMT</lastBuildDate><item><title><![CDATA[AbortController로 Race Condition 해결하기]]></title><description><![CDATA[검색창에 타이핑할 때마다 API를 호출하면, 응답이 요청 순서와 다르게 돌아올 수 있다. 네트워크 상황에 따라 먼저 보낸 요청이 나중에 올 수 있기 때문인데, 이를 Race Condition이라고 한다. 이는 AbortController…]]></description><link>https://thumbzzero.github.io/abort-controller/</link><guid isPermaLink="false">https://thumbzzero.github.io/abort-controller/</guid><pubDate>Wed, 13 May 2026 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;검색창에 타이핑할 때마다 API를 호출하면, 응답이 요청 순서와 다르게 돌아올 수 있다. 네트워크 상황에 따라 먼저 보낸 요청이 나중에 올 수 있기 때문인데, 이를 &lt;strong&gt;Race Condition&lt;/strong&gt;이라고 한다. 이는 &lt;strong&gt;AbortController&lt;/strong&gt;로 해결할 수 있다.&lt;/p&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Blog RSS Feed]]></title><description><![CDATA[개발 기록]]></description><link>https://thumbzzero.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Tue, 19 May 2026 13:29:43 GMT</lastBuildDate><item><title><![CDATA[Critical Rendering Path]]></title><description><![CDATA[Critical Rendering Path란? 브라우저가 서버로부터 HTML을 받아서 화면에 픽셀로 그려내기까지의 과정을 Critical Rendering Path(CRP…]]></description><link>https://thumbzzero.github.io/critical-rendering-path/</link><guid isPermaLink="false">https://thumbzzero.github.io/critical-rendering-path/</guid><pubDate>Tue, 19 May 2026 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;Critical Rendering Path란?&lt;/h2&gt;
+&lt;p&gt;브라우저가 서버로부터 HTML을 받아서 화면에 픽셀로 그려내기까지의 과정을 &lt;a href=&quot;https://developer.mozilla.org/ko/docs/Web/Performance/Guides/Critical_rendering_path&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;&lt;strong&gt;Critical Rendering Path(CRP)&lt;/strong&gt;&lt;/a&gt; 라고 한다.&lt;/p&gt;
+&lt;p&gt;이 과정을 이해하면 &quot;왜 이 페이지는 느리지?&quot;, &quot;왜 스타일이 잠깐 깨졌다가 적용되지?&quot; 같은 문제의 원인을 파악할 수 있다.&lt;/p&gt;
+&lt;p&gt;크게 아래 단계로 이루어진다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;HTML 파싱 → DOM 생성
+CSS 파싱 → CSSOM 생성
+DOM + CSSOM → Render Tree 생성
+Layout
+Paint
+Composite&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;하나씩 살펴보자.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;1. DOM 생성&lt;/h2&gt;
+&lt;p&gt;브라우저는 서버로부터 받은 HTML을 한 줄씩 읽으면서 &lt;strong&gt;DOM(Document Object Model)&lt;/strong&gt; 트리를 만든다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;html&quot;&gt;&lt;pre class=&quot;language-html&quot;&gt;&lt;code class=&quot;language-html&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;html&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+  &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;body&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+    &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;h1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;안녕하세요&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;h1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+    &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;p&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;반갑습니다&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;p&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+  &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;body&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;html&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;이 HTML은 아래와 같은 트리 구조로 변환된다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;Document
+└── html
+    └── body
+        ├── h1 (&quot;안녕하세요&quot;)
+        └── p (&quot;반갑습니다&quot;)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;이때 HTML을 파싱하다가 &lt;code class=&quot;language-text&quot;&gt;&amp;lt;script&gt;&lt;/code&gt; 태그를 만나면 &lt;strong&gt;파싱이 멈춘다.&lt;/strong&gt; JavaScript가 DOM을 변경할 수 있기 때문에 브라우저가 일단 JS를 먼저 실행하고 다시 파싱을 재개한다. 그래서 &lt;code class=&quot;language-text&quot;&gt;&amp;lt;script&gt;&lt;/code&gt; 태그를 &lt;code class=&quot;language-text&quot;&gt;&amp;lt;body&gt;&lt;/code&gt; 맨 아래에 두거나 &lt;code class=&quot;language-text&quot;&gt;defer&lt;/code&gt; 속성을 쓰는 게 일반적이다.&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;defer&lt;/code&gt;를 쓰면 JS 파일을 백그라운드에서 다운로드하면서 HTML 파싱을 계속 진행하고, 파싱이 완전히 끝난 뒤에 JS를 실행한다. 파싱을 블로킹하지 않으니 초기 렌더링이 빨라진다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;html&quot;&gt;&lt;pre class=&quot;language-html&quot;&gt;&lt;code class=&quot;language-html&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;script&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;defer&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation attr-equals&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;app.js&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token script&quot;&gt;&lt;/span&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;script&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;hr&gt;
+&lt;h2&gt;2. CSSOM 생성&lt;/h2&gt;
+&lt;p&gt;HTML 파싱 중 &lt;code class=&quot;language-text&quot;&gt;&amp;lt;link rel=&quot;stylesheet&quot;&gt;&lt;/code&gt; 를 만나면 CSS 파일을 받아서 &lt;strong&gt;CSSOM(CSS Object Model)&lt;/strong&gt; 트리를 만든다.&lt;/p&gt;
+&lt;p&gt;CSSOM은 DOM과 비슷한 트리 구조인데, 중요한 특징이 있다. CSS는 &lt;strong&gt;cascading&lt;/strong&gt; 특성상 부모의 스타일이 자식에게 상속되기 때문에, 브라우저는 CSS를 전부 파싱하기 전까지 CSSOM을 완성할 수 없다.&lt;/p&gt;
+&lt;p&gt;즉, &lt;strong&gt;CSS는 렌더링을 블로킹한다.&lt;/strong&gt; CSS 파일이 늦게 로드되면 그만큼 화면이 늦게 그려진다.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;3. Render Tree 생성&lt;/h2&gt;
+&lt;p&gt;DOM과 CSSOM이 완성되면 두 트리를 합쳐서 &lt;strong&gt;Render Tree&lt;/strong&gt;를 만든다.&lt;/p&gt;
+&lt;p&gt;Render Tree에는 실제로 화면에 보이는 요소만 포함된다. 예를 들어 &lt;code class=&quot;language-text&quot;&gt;display: none&lt;/code&gt;이 적용된 요소는 Render Tree에 포함되지 않는다. (참고로 &lt;code class=&quot;language-text&quot;&gt;visibility: hidden&lt;/code&gt;은 공간은 차지하므로 Render Tree에 포함된다.)&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;4. Layout (Reflow)&lt;/h2&gt;
+&lt;p&gt;Render Tree가 완성되면 각 요소의 &lt;strong&gt;크기와 위치&lt;/strong&gt;를 계산한다. 이 과정을 &lt;strong&gt;Layout&lt;/strong&gt; 또는 &lt;strong&gt;Reflow&lt;/strong&gt;라고 한다.&lt;/p&gt;
+&lt;p&gt;뷰포트 크기, 폰트 크기, 요소의 width/height 등을 기반으로 화면 어디에 얼마나 크게 그릴지 계산한다.&lt;/p&gt;
+&lt;p&gt;이 과정은 비용이 크다. 특히 DOM 요소의 크기나 위치를 JS로 변경하면 Layout이 다시 일어나는데, 이게 자주 발생하면 성능 저하로 이어진다.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;5. Paint (Repaint)&lt;/h2&gt;
+&lt;p&gt;Layout이 끝나면 실제로 픽셀을 채워넣는 &lt;strong&gt;Paint&lt;/strong&gt; 단계가 진행된다. 색상, 배경, 그림자, 텍스트 등을 그린다.&lt;/p&gt;
+&lt;p&gt;Layout과 마찬가지로 스타일 변경이 생기면 다시 발생한다. 다만 &lt;code class=&quot;language-text&quot;&gt;color&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;background-color&lt;/code&gt; 같은 변경은 Layout은 건드리지 않고 Paint만 다시 일어난다.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;6. Composite&lt;/h2&gt;
+&lt;p&gt;마지막으로 여러 레이어를 합성해서 최종 화면을 만드는 &lt;strong&gt;Composite&lt;/strong&gt; 단계다.&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;transform&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;opacity&lt;/code&gt; 같은 속성은 Layout과 Paint를 건드리지 않고 Composite 단계에서만 처리된다. 그래서 애니메이션을 만들 때 &lt;code class=&quot;language-text&quot;&gt;left/top&lt;/code&gt; 대신 &lt;code class=&quot;language-text&quot;&gt;transform&lt;/code&gt;을 쓰는 게 성능상 유리한 이유가 여기 있다😄&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;정리&lt;/h2&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;HTML 파싱    → DOM 생성        (script 태그 만나면 파싱 블로킹)
+CSS 파싱     → CSSOM 생성      (렌더링 블로킹)
+DOM + CSSOM  → Render Tree    (display:none 제외)
+Layout       → 크기/위치 계산  (비용 큼)
+Paint        → 픽셀 채우기     (색상, 배경 등)
+Composite    → 레이어 합성     (transform, opacity는 여기서만)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;이 흐름을 알고 있으면 성능 문제가 생겼을 때 어느 단계에서 병목이 생기는지 좁혀나갈 수 있다.&lt;/p&gt;
+&lt;p&gt;예를 들면 이런 식이다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;페이지 첫 로딩이 느리다&lt;/strong&gt; → &lt;code class=&quot;language-text&quot;&gt;&amp;lt;head&gt;&lt;/code&gt;에 파싱을 블로킹하는 &lt;code class=&quot;language-text&quot;&gt;&amp;lt;script&gt;&lt;/code&gt;가 있는 건 아닌지, CSS 파일이 너무 크지 않은지 (DOM 파싱 / CSSOM 생성)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;스타일이 잠깐 깨졌다가 적용된다&lt;/strong&gt; → Render Tree가 두 번 만들어지면서 Paint가 두 번 일어나는 것. CSS가 &lt;code class=&quot;language-text&quot;&gt;&amp;lt;head&gt;&lt;/code&gt;가 아닌 곳에 있거나, JS로 동적으로 삽입되거나, 웹폰트가 늦게 로드되는 경우에 발생한다 (Render Tree)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;스크롤할 때 버벅인다&lt;/strong&gt; → JS가 매 프레임마다 &lt;code class=&quot;language-text&quot;&gt;offsetHeight&lt;/code&gt; 같은 값을 읽어서 강제로 Reflow를 유발하는 건 아닌지 (Layout)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;애니메이션이 끊긴다&lt;/strong&gt; → &lt;code class=&quot;language-text&quot;&gt;left/top&lt;/code&gt; 대신 &lt;code class=&quot;language-text&quot;&gt;transform&lt;/code&gt;으로 바꾸면 Composite만 일어나서 개선되는 경우가 많다 (Composite)&lt;/li&gt;
+&lt;/ul&gt;</content:encoded></item><item><title><![CDATA[AbortController로 Race Condition 해결하기]]></title><description><![CDATA[검색창에 타이핑할 때마다 API를 호출하면, 응답이 요청 순서와 다르게 돌아올 수 있다. 네트워크 상황에 따라 먼저 보낸 요청이 나중에 올 수 있기 때문인데, 이를 Race Condition이라고 한다. 이는 AbortController…]]></description><link>https://thumbzzero.github.io/abort-controller/</link><guid isPermaLink="false">https://thumbzzero.github.io/abort-controller/</guid><pubDate>Wed, 13 May 2026 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;검색창에 타이핑할 때마다 API를 호출하면, 응답이 요청 순서와 다르게 돌아올 수 있다. 네트워크 상황에 따라 먼저 보낸 요청이 나중에 올 수 있기 때문인데, 이를 &lt;strong&gt;Race Condition&lt;/strong&gt;이라고 한다. 이는 &lt;strong&gt;AbortController&lt;/strong&gt;로 해결할 수 있다.&lt;/p&gt;
 &lt;hr&gt;
 &lt;h2&gt;문제 상황&lt;/h2&gt;
 &lt;p&gt;예를 들어 &quot;리액트&quot;를 검색한다고 해보자.&lt;/p&gt;
@@ -10,7 +76,7 @@
 &lt;p&gt;우리가 원하는 건 마지막 요청 C의 결과가 화면에 표시되는 것이다. 근데 네트워크 상황에 따라 응답이 &lt;strong&gt;C → B → A&lt;/strong&gt; 순서로 올 수도 있다. 그러면 최종적으로 &quot;리&quot;에 대한 검색 결과가 화면에 남아버리는 버그가 생긴다😱&lt;/p&gt;
 &lt;hr&gt;
 &lt;h2&gt;AbortController란?&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;AbortController&lt;/strong&gt;는 fetch 요청을 취소할 수 있게 해주는 Web API다.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://developer.mozilla.org/ko/docs/Web/API/AbortController&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;&lt;strong&gt;AbortController&lt;/strong&gt;&lt;/a&gt;는 fetch 요청을 취소할 수 있게 해주는 Web API다.&lt;/p&gt;
 &lt;p&gt;사용법은 간단하다.&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;javascript&quot;&gt;&lt;pre class=&quot;language-javascript&quot;&gt;&lt;code class=&quot;language-javascript&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; controller &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;AbortController&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; signal &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; controller&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;signal&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
@@ -127,16 +193,18 @@ When a file is added to the pages directory, it&apos;s automatically available a
 In Next.js, a page is a React Component exported from a .js, .jsx, .ts, or .tsx file in the pages directory. Each page is associated with a route based on its file name.
 &lt;/div&gt;  
 &lt;br&gt;
-&lt;p&gt;&lt;a href=&quot;https://nextjs.org/docs/pages/building-your-application/routing/pages-and-layouts&quot;&gt;공식 문서 링크&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Express + TypeScript 프로젝트 세팅]]></title><description><![CDATA[npm init 터미널에 을 실행한 뒤 터미널에 뜨는 각종 정보(ex. 프로젝트명, description, 라이선스 등)를 입력한다. default…]]></description><link>https://thumbzzero.github.io/express-typescript-setup/</link><guid isPermaLink="false">https://thumbzzero.github.io/express-typescript-setup/</guid><pubDate>Thu, 08 Aug 2024 00:00:00 GMT</pubDate><content:encoded>&lt;h3&gt;npm init&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&quot;https://nextjs.org/docs/pages/building-your-application/routing/pages-and-layouts&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;공식 문서 링크&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Express + TypeScript 프로젝트 세팅]]></title><description><![CDATA[npm init 터미널에 을 실행한 뒤 터미널에 뜨는 각종 정보(ex. 프로젝트명, description, 라이선스 등)를 입력한다. default…]]></description><link>https://thumbzzero.github.io/express-typescript-setup/</link><guid isPermaLink="false">https://thumbzzero.github.io/express-typescript-setup/</guid><pubDate>Thu, 08 Aug 2024 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;npm init&lt;/h2&gt;
 &lt;p&gt;터미널에 &lt;code class=&quot;language-text&quot;&gt;npm init&lt;/code&gt;을 실행한 뒤 터미널에 뜨는 각종 정보(ex. 프로젝트명, description, 라이선스 등)를 입력한다.&lt;br&gt;
 default 값을 사용하고 싶은 경우에는 그냥 &lt;code class=&quot;language-text&quot;&gt;Enter&lt;/code&gt;를 치면 된다!&lt;br&gt;
 모두 입력을 마치면 입력한 정보를 기반으로 &lt;code class=&quot;language-text&quot;&gt;package.json&lt;/code&gt; 파일이 생성된다.&lt;/p&gt;
 &lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;npm init --yes&lt;/code&gt;를 입력하면 각종 정보 입력하는 과정은 스킵하고 default 값으로 바로 생성이 된다.&lt;br&gt;
 (물론 나중에 수정이 가능하다.)&lt;/p&gt;
-&lt;h3&gt;TypeScript 설치&lt;/h3&gt;
+&lt;hr&gt;
+&lt;h2&gt;TypeScript 설치&lt;/h2&gt;
 &lt;p&gt;TypeScript가 이미 설치되어 있으면 생략이 가능하다.&lt;br&gt;
 &lt;code class=&quot;language-text&quot;&gt;tsc -v&lt;/code&gt; 명령어를 실행해서 설치 여부를 확인한 뒤 설치가 필요한 경우 &lt;code class=&quot;language-text&quot;&gt;npm i -g typescript&lt;/code&gt; 명령어를 통해 설치한다.&lt;/p&gt;
-&lt;h3&gt;tsc --init&lt;/h3&gt;
+&lt;hr&gt;
+&lt;h2&gt;tsc --init&lt;/h2&gt;
 &lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;tsc --init&lt;/code&gt; 명령어를 실행한다.&lt;br&gt;
 실행하고 나면 &lt;code class=&quot;language-text&quot;&gt;tsconfig.json&lt;/code&gt;이라는 파일이 생성된다.&lt;/p&gt;
 &lt;p&gt;기본으로 생성된 파일 내용에서 설정하고 싶은 값들을 수정해 주면 된다.&lt;br&gt;
@@ -147,7 +215,7 @@ default 값을 사용하고 싶은 경우에는 그냥 &lt;code class=&quot;lang
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;outDir&lt;/code&gt; 값은 컴파일된 JavaScript 파일이 저장되는 디렉토리를 설정하는 값이다.
 위와 같이 설정할 경우 컴파일된 JavaScript 파일이 build 폴더 안에 저장된다.&lt;/p&gt;
-&lt;h5&gt;전체 파일 내용&lt;/h5&gt;
+&lt;h3&gt;전체 파일 내용&lt;/h3&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;json&quot;&gt;&lt;pre class=&quot;language-json&quot;&gt;&lt;code class=&quot;language-json&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
   &lt;span class=&quot;token property&quot;&gt;&quot;compilerOptions&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
     &lt;span class=&quot;token comment&quot;&gt;/* Visit https://aka.ms/tsconfig to read more about this file */&lt;/span&gt;
@@ -257,15 +325,19 @@ default 값을 사용하고 싶은 경우에는 그냥 &lt;code class=&quot;lang
   &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h3&gt;express 설치&lt;/h3&gt;
+&lt;hr&gt;
+&lt;h2&gt;express 설치&lt;/h2&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;npm install express
 npm install -D @types/express&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h3&gt;nodemon 설치&lt;/h3&gt;
+&lt;hr&gt;
+&lt;h2&gt;nodemon 설치&lt;/h2&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;npm i nodemon --save-dev&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;nodemon은 코드 저장 시 자동으로 재실행하기 위해 설치한다.&lt;/p&gt;
-&lt;h3&gt;/src/app.ts&lt;/h3&gt;
+&lt;hr&gt;
+&lt;h2&gt;/src/app.ts&lt;/h2&gt;
 &lt;p&gt;소스코드는 src 디렉토리 내에서 모두 관리하기 위해 src 디렉토리 아래에 app.ts를 생성해 주었다.&lt;/p&gt;
-&lt;h3&gt;package.json 수정&lt;/h3&gt;
+&lt;hr&gt;
+&lt;h2&gt;package.json 수정&lt;/h2&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;json&quot;&gt;&lt;pre class=&quot;language-json&quot;&gt;&lt;code class=&quot;language-json&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
   &lt;span class=&quot;token property&quot;&gt;&quot;main&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;src/app.ts&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
   &lt;span class=&quot;token property&quot;&gt;&quot;scripts&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
@@ -281,7 +353,8 @@ app.ts를 src가 아닌 최상단에 설정한 경우에는 &lt;code class=&quot
 서버를 실행할 때는 &lt;code class=&quot;language-text&quot;&gt;npm start&lt;/code&gt; 명령어를 사용하면 실행이 되며, 저장을 할 때마다 nodemon이 새로 컴파일을 해준다.&lt;br&gt;
 (※ 이 역시 프로젝트 최상단의 app.ts를 실행하고자 하는 경우에는&lt;br&gt;
 &lt;code class=&quot;language-text&quot;&gt;&quot;compile&quot;: &quot;tsc &amp;amp;&amp;amp; node ./build/app.js&quot;&lt;/code&gt;로 수정해 준다.)&lt;/p&gt;
-&lt;h3&gt;gitignore 설정&lt;/h3&gt;
+&lt;hr&gt;
+&lt;h2&gt;gitignore 설정&lt;/h2&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;# dependencies
 /node_modules
 
@@ -307,16 +380,18 @@ Error: Text content does not match server-rendered HTML.&lt;/p&gt;
 &lt;p&gt;위의 에러는 server-rendered HTML(서버 측의 pre-rendering HTML)과 브라우저에서 hydration 된 후 최초로 렌더링 된 content가 다를 때 발생한다.&lt;/p&gt;
 &lt;p&gt;이상한 점은 개발 환경에서도 문제가 없었고, 노트북으로 접속 시에는 확인하지 못했던 Error인데, 모바일/아이패드 기기에서 사파리로 접속 시에만 발생한다는 점이었다🤯&lt;/p&gt;
 &lt;p&gt;hydration error는 &lt;code class=&quot;language-text&quot;&gt;typeof window !== &apos;undefined&apos;&lt;/code&gt;를 체크하지 않았거나, client only 코드를 &lt;code class=&quot;language-text&quot;&gt;useEffect&lt;/code&gt; 내에서 사용하지 않은 경우에 자주 발생하는데 이러한 상황은 아니었다!&lt;/p&gt;
-&lt;h4&gt;원인&lt;/h4&gt;
+&lt;hr&gt;
+&lt;h2&gt;원인&lt;/h2&gt;
 &lt;p&gt;iOS 환경에서 전화번호, 주소, 이메일 주소와 같은 text content들을 감지하여 자동으로 링크로 변환하기 때문에 hydration mismatch가 발생한다고 한다. (이러한 기능을 &lt;strong&gt;format-detection&lt;/strong&gt; 이라고 한다.)&lt;/p&gt;
 &lt;p&gt;실제로 mismatch 텍스트로 뜨던 부분이 회사 전화번호와 문의 이메일 부분이었다😮&lt;/p&gt;
-&lt;h4&gt;해결&lt;/h4&gt;
+&lt;hr&gt;
+&lt;h2&gt;해결&lt;/h2&gt;
 &lt;p&gt;아래의 meta tag를 이용해 format-detection 기능을 끔으로써 해결할 수 있다.&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;html&quot;&gt;&lt;pre class=&quot;language-html&quot;&gt;&lt;code class=&quot;language-html&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;meta&lt;/span&gt;
   &lt;span class=&quot;token attr-name&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation attr-equals&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;format-detection&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;
   &lt;span class=&quot;token attr-name&quot;&gt;content&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation attr-equals&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;telephone=no, date=no, email=no, address=no&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;
 &lt;span class=&quot;token punctuation&quot;&gt;/&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;관련된 공식 문서 내용은 &lt;a href=&quot;https://nextjs.org/docs/messages/react-hydration-error#common-ios-issues&quot;&gt;여기&lt;/a&gt;에서 확인할 수 있다.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[개발 블로그 이사]]></title><description><![CDATA[개발 블로그를 에서 를 이용한 Github Pages로 이사했다. velog의 간편한 작성법과 깔끔한 UI…]]></description><link>https://thumbzzero.github.io/blog-migration/</link><guid isPermaLink="false">https://thumbzzero.github.io/blog-migration/</guid><pubDate>Sun, 10 Mar 2024 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;개발 블로그를 &lt;code class=&quot;language-text&quot;&gt;velog&lt;/code&gt;에서 &lt;code class=&quot;language-text&quot;&gt;Gatsby&lt;/code&gt;를 이용한 Github Pages로 이사했다.&lt;/p&gt;
+&lt;p&gt;관련된 공식 문서 내용은 &lt;a href=&quot;https://nextjs.org/docs/messages/react-hydration-error#common-ios-issues&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;여기&lt;/a&gt;에서 확인할 수 있다.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[개발 블로그 이사]]></title><description><![CDATA[개발 블로그를 에서 를 이용한 Github Pages로 이사했다. velog의 간편한 작성법과 깔끔한 UI…]]></description><link>https://thumbzzero.github.io/blog-migration/</link><guid isPermaLink="false">https://thumbzzero.github.io/blog-migration/</guid><pubDate>Sun, 10 Mar 2024 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;개발 블로그를 &lt;code class=&quot;language-text&quot;&gt;velog&lt;/code&gt;에서 &lt;code class=&quot;language-text&quot;&gt;Gatsby&lt;/code&gt;를 이용한 Github Pages로 이사했다.&lt;/p&gt;
 &lt;p&gt;velog의 간편한 작성법과 깔끔한 UI도 마음에 들었지만, 어느 순간부터 블로그를 더 예쁘게 만들고 싶다는 욕심이 들어 바꾸기로 결정하였다😆&lt;/p&gt;
 &lt;p&gt;기존 블로그의 글들은 아래의 링크에서 확인할 수 있다!&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://velog.io/@thumbzzero&quot;&gt;https://velog.io/@thumbzzero&lt;/a&gt;&lt;/p&gt;</content:encoded></item></channel></rss>
+&lt;p&gt;&lt;a href=&quot;https://velog.io/@thumbzzero&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;https://velog.io/@thumbzzero&lt;/a&gt;&lt;/p&gt;</content:encoded></item></channel></rss>
