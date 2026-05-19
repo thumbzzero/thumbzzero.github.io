@@ -20,13 +20,17 @@ tags: ["Debugging"]
 
 hydration error는 `typeof window !== 'undefined'`를 체크하지 않았거나, client only 코드를 `useEffect` 내에서 사용하지 않은 경우에 자주 발생하는데 이러한 상황은 아니었다!
 
-#### 원인
+---
+
+## 원인
 
 iOS 환경에서 전화번호, 주소, 이메일 주소와 같은 text content들을 감지하여 자동으로 링크로 변환하기 때문에 hydration mismatch가 발생한다고 한다. (이러한 기능을 **format-detection** 이라고 한다.)
 
 실제로 mismatch 텍스트로 뜨던 부분이 회사 전화번호와 문의 이메일 부분이었다😮
 
-#### 해결
+---
+
+## 해결
 
 아래의 meta tag를 이용해 format-detection 기능을 끔으로써 해결할 수 있다.
 
