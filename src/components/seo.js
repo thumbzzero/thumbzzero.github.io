@@ -8,7 +8,9 @@
 import * as React from "react"
 import { useStaticQuery, graphql } from "gatsby"
 
-const Seo = ({ description, title, children }) => {
+const PROFILE_IMAGE_URL = "https://avatars.githubusercontent.com/u/94180099?v=4"
+
+const Seo = ({ description, title, image, children }) => {
   const { site } = useStaticQuery(
     graphql`
       query {
@@ -27,6 +29,7 @@ const Seo = ({ description, title, children }) => {
 
   const metaDescription = description || site.siteMetadata.description
   const defaultTitle = site.siteMetadata?.title
+  const metaImage = image || PROFILE_IMAGE_URL
 
   return (
     <>
@@ -35,7 +38,9 @@ const Seo = ({ description, title, children }) => {
       <meta property="og:title" content={title} />
       <meta property="og:description" content={metaDescription} />
       <meta property="og:type" content="website" />
+      <meta property="og:image" content={metaImage} />
       <meta name="twitter:card" content="summary" />
+      <meta name="twitter:image" content={metaImage} />
       <meta
         name="twitter:creator"
         content={site.siteMetadata?.social?.twitter || ``}
