@@ -23,7 +23,7 @@ tags: ["JavaScript"]
 
 ## AbortController란?
 
-**AbortController**는 fetch 요청을 취소할 수 있게 해주는 Web API다.
+[**AbortController**](https://developer.mozilla.org/ko/docs/Web/API/AbortController)는 fetch 요청을 취소할 수 있게 해주는 Web API다.
 
 사용법은 간단하다.
 
