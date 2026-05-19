@@ -348,9 +348,11 @@ a:focus {
   transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
 }
 
-.tag-filter-btn:hover {
-  border-color: var(--color-primary);
-  color: var(--color-primary);
+@media (hover: hover) {
+  .tag-filter-btn:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+  }
 }
 
 .tag-filter-btn.active {
@@ -378,9 +380,11 @@ a:focus {
   transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
 }
 
-.tag-pill:hover {
-  border-color: var(--color-primary);
-  color: var(--color-primary);
+@media (hover: hover) {
+  .tag-pill:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+  }
 }
 
 .tag-pill.active {
