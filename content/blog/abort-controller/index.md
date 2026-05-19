@@ -2,6 +2,7 @@
 title: "AbortController로 Race Condition 해결하기"
 date: "2026-05-13"
 description: "검색창에서 연속된 API 요청이 발생할 때 Race Condition이 생기는 이유와, AbortController로 해결하는 방법"
+tags: ["JavaScript"]
 ---
 
 검색창에 타이핑할 때마다 API를 호출하면, 응답이 요청 순서와 다르게 돌아올 수 있다. 네트워크 상황에 따라 먼저 보낸 요청이 나중에 올 수 있기 때문인데, 이를 **Race Condition**이라고 한다. 이는 **AbortController**로 해결할 수 있다.

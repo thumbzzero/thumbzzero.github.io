@@ -2,6 +2,7 @@
 title: "[Next.js] Build optimization failed: found page without a React Component as default export 에러"
 date: "2024-10-17"
 description: "Build optimization failed: found page without a React Component as default export 에러 원인과 해결"
+tags: ["Next.js", "Debugging"]
 ---
 
 Next.js로 개발 중이던 프로젝트를 `npm run build` 커맨드를 이용하여 빌드를 시도했는데, 아래와 같은 에러가 발생하며 빌드에 실패하였다.

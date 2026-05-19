@@ -2,6 +2,7 @@
 title: "모바일 사파리 hydration 오류"
 date: "2024-04-28"
 description: "Unhandled Runtime Error: Text content does not match server-rendered HTML."
+tags: ["Debugging"]
 ---
 
 회사 홈페이지 new 버전을 개발하는 업무를 맡게 되어 개발 및 deploy를 마쳤을 때 발견하게 된 이슈이다.
