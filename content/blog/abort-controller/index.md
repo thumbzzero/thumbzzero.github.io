@@ -76,6 +76,14 @@ fetch에 signal을 전달하면 해당 요청이 AbortController와 연결된다
 
 ---
 
+## 연속 요청 제어 패턴
+
+한 번 abort된 signal은 재사용할 수 없다. `abort()`를 호출하면 `signal.aborted`가 `true`로 고정되고, 이후 같은 signal로 fetch를 시도하면 즉시 `AbortError`가 발생한다.
+
+그래서 연속 요청이 필요한 상황에서는 **매 요청마다 새 AbortController를 생성**해야 한다. 위 코드에서 `controller = new AbortController()`를 매번 새로 만드는 것이 바로 이 이유다. 입력 필드에서 API를 반복 호출하는 구조라면 이전 요청을 취소하고 새 컨트롤러를 만드는 흐름이 기본 패턴이 된다.
+
+---
+
 ## debounce와 함께 쓰기
 
 검색창 구현할 때는 debounce를 함께 쓰는 게 일반적이다. debounce는 타이핑이 멈춘 후 일정 시간이 지나야 API를 호출하도록 해서 **요청 횟수 자체를 줄여주고**, AbortController는 이미 보낸 요청을 취소해서 **Race Condition을 방지한다.** 역할이 다르기 때문에 함께 쓰면 더 안전하다.
