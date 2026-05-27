@@ -1,4 +1,105 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Blog RSS Feed]]></title><description><![CDATA[개발 기록]]></description><link>https://thumbzzero.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Wed, 20 May 2026 14:08:40 GMT</lastBuildDate><item><title><![CDATA[Sticky Hover - 터치 디바이스에서 hover가 안 사라지는 문제]]></title><description><![CDATA[모바일에서 버튼이나 링크를 탭했을 때 hover 스타일이 사라지지 않고 남아있는 경우가 있다. 이를 Sticky Hover라고 하는데, 대부분 의도한 동작은 아닐 것이다. 문제 상황 마우스 환경에서는 버튼 밖으로 이동하면 hover…]]></description><link>https://thumbzzero.github.io/sticky-hover/</link><guid isPermaLink="false">https://thumbzzero.github.io/sticky-hover/</guid><pubDate>Wed, 20 May 2026 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;모바일에서 버튼이나 링크를 탭했을 때 hover 스타일이 사라지지 않고 남아있는 경우가 있다. 이를 &lt;strong&gt;Sticky Hover&lt;/strong&gt;라고 하는데, 대부분 의도한 동작은 아닐 것이다.&lt;/p&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Blog RSS Feed]]></title><description><![CDATA[개발 기록]]></description><link>https://thumbzzero.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Wed, 27 May 2026 23:35:49 GMT</lastBuildDate><item><title><![CDATA[이벤트 루프 - 콜스택, 태스크 큐, 마이크로태스크]]></title><description><![CDATA[JavaScript는 싱글 스레드 언어다. 한 번에 하나의 작업만 처리할 수 있다는 뜻인데, 그럼에도 불구하고 비동기 작업이 가능한 이유가 바로 이벤트 루프 덕분이다. 콜스택 (Call Stack) JavaScript…]]></description><link>https://thumbzzero.github.io/event-loop/</link><guid isPermaLink="false">https://thumbzzero.github.io/event-loop/</guid><pubDate>Thu, 28 May 2026 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;JavaScript는 싱글 스레드 언어다. 한 번에 하나의 작업만 처리할 수 있다는 뜻인데, 그럼에도 불구하고 비동기 작업이 가능한 이유가 바로 &lt;strong&gt;이벤트 루프&lt;/strong&gt; 덕분이다.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;콜스택 (Call Stack)&lt;/h2&gt;
+&lt;p&gt;JavaScript 엔진이 함수를 실행할 때 사용하는 공간이다. 함수가 호출되면 스택에 쌓이고, 실행이 끝나면 제거된다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;javascript&quot;&gt;&lt;pre class=&quot;language-javascript&quot;&gt;&lt;code class=&quot;language-javascript&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token function&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;b&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token function&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;실행 순서는 아래와 같다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;a() 호출 → 스택에 a 추가
+b() 호출 → 스택에 b 추가
+console.log(&apos;b&apos;) 실행
+b 종료 → 스택에서 b 제거
+a 종료 → 스택에서 a 제거&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;콜스택이 꽉 차면 &lt;code class=&quot;language-text&quot;&gt;Maximum call stack size exceeded&lt;/code&gt; 에러가 발생한다. 재귀 함수를  잘못 짰을 때 보이는 그 에러다 😢&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;Web APIs&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://developer.mozilla.org/ko/docs/Web/API/Window/setTimeout&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;setTimeout&lt;/code&gt;&lt;/a&gt;, &lt;a href=&quot;https://developer.mozilla.org/ko/docs/Web/API/Fetch_API&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;fetch&lt;/code&gt;&lt;/a&gt;, &lt;a href=&quot;https://developer.mozilla.org/ko/docs/Web/API/EventTarget/addEventListener&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;addEventListener&lt;/code&gt;&lt;/a&gt; 같은 비동기 함수들은 사실 JavaScript 엔진이 아니라 &lt;strong&gt;브라우저가 제공하는 &lt;a href=&quot;https://developer.mozilla.org/ko/docs/Web/API&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;Web API&lt;/a&gt;s&lt;/strong&gt;다.&lt;/p&gt;
+&lt;p&gt;이 함수들이 호출되면 브라우저가 백그라운드에서 처리하고, 작업이 완료되면 콜백 함수를 &lt;strong&gt;큐(Queue)&lt;/strong&gt; 에 넣는다. JavaScript 엔진은 콜스택이 비었을 때 큐에서 콜백 함수를 꺼내서 실행한다.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;태스크 큐 (Task Queue)&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;매크로태스크 큐 (Macrotask Queue)&lt;/strong&gt; 라고도 한다. 아래 작업들의 콜백이 여기에 들어간다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;setTimeout&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;setInterval&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;I/O 이벤트&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2&gt;마이크로태스크 큐 (Microtask Queue)&lt;/h2&gt;
+&lt;p&gt;태스크 큐와 별개로 존재하는 큐다. 아래 작업들의 콜백이 여기에 들어간다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;Promise.then&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;Promise.catch&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;Promise.finally&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;MutationObserver&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2&gt;이벤트 루프의 동작 순서&lt;/h2&gt;
+&lt;p&gt;이벤트 루프는 아래 순서로 반복 동작한다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;1. (태스크 큐에 작업이 있다면) 가장 오래된 태스크를 &apos;하나&apos; 꺼내어 실행한다.
+   ※ 스크립트 파일이 처음 로드되어 실행되는 것 자체가 첫 번째 태스크다.
+2. 콜스택이 비어지면, 마이크로태스크 큐에 대기 중인 &apos;모든&apos; 콜백을 전부 비울 때까지 실행한다.
+3. 마이크로태스크가 모두 비워지면, 브라우저는 필요한 경우 화면을 갱신하는 &apos;렌더링 파이프라인&apos;을 실행한다.
+4. 다시 1번으로 돌아가 반복한다.&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;핵심은 두 가지다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;마이크로태스크 큐는 전부 비울 때까지 실행&lt;/strong&gt;한다&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;태스크 큐는 한 번에 하나씩만&lt;/strong&gt; 실행한다&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2&gt;예시로 이해하기&lt;/h2&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;javascript&quot;&gt;&lt;pre class=&quot;language-javascript&quot;&gt;&lt;code class=&quot;language-javascript&quot;&gt;console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;1&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token function&quot;&gt;setTimeout&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;2&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+Promise&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;resolve&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;then&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;3&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;4&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;출력 순서가 어떻게 될까?&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;1
+4
+3
+2&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;순서대로 따라가보면 아래와 같다.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;console.log(&apos;1&apos;)&lt;/code&gt; → 콜스택에서 바로 실행&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;setTimeout&lt;/code&gt; → Web API로 넘어감. 콜백(&lt;code class=&quot;language-text&quot;&gt;&apos;2&apos;&lt;/code&gt;)은 태스크 큐에 대기&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;Promise.resolve().then&lt;/code&gt; → 콜백(&lt;code class=&quot;language-text&quot;&gt;&apos;3&apos;&lt;/code&gt;)은 마이크로태스크 큐에 대기&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;console.log(&apos;4&apos;)&lt;/code&gt; → 콜스택에서 바로 실행&lt;/li&gt;
+&lt;li&gt;콜스택이 비었으므로 마이크로태스크 큐 확인 → &lt;code class=&quot;language-text&quot;&gt;&apos;3&apos;&lt;/code&gt; 실행&lt;/li&gt;
+&lt;li&gt;마이크로태스크 큐가 비었으므로 태스크 큐 확인 → &lt;code class=&quot;language-text&quot;&gt;&apos;2&apos;&lt;/code&gt; 실행&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;setTimeout&lt;/code&gt;의 딜레이가 &lt;code class=&quot;language-text&quot;&gt;0&lt;/code&gt;이어도 Promise보다 늦게 실행되는 이유가 여기 있다.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;마이크로태스크가 쌓이면 생기는 문제&lt;/h2&gt;
+&lt;p&gt;마이크로태스크 큐는 전부 비울 때까지 실행하기 때문에, 마이크로태스크 안에서 마이크로태스크를 계속 추가하면 태스크 큐가 영원히 실행되지 않을 수 있다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;javascript&quot;&gt;&lt;pre class=&quot;language-javascript&quot;&gt;&lt;code class=&quot;language-javascript&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;infiniteMicrotask&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  Promise&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;resolve&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;then&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;infiniteMicrotask&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token function&quot;&gt;infiniteMicrotask&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token function&quot;&gt;setTimeout&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;이건 영원히 실행 안 됨&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;마이크로태스크가 계속 쌓이면 브라우저가 렌더링 파이프라인을 실행할 기회를 얻지 못하기 때문에, 다음 매크로태스크가 실행되지 않을 뿐만 아니라 &lt;strong&gt;화면이 멈춘 것처럼(Frozen)&lt;/strong&gt; 보일 수 있다.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;정리&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;JavaScript는 싱글 스레드지만 이벤트 루프 덕분에 비동기 처리가 가능하다&lt;/li&gt;
+&lt;li&gt;매크로태스크 하나가 끝날 때마다 마이크로태스크 큐를 전부 비우고, 브라우저가 화면을 렌더링한 뒤 다음 태스크를 처리한다&lt;/li&gt;
+&lt;li&gt;Promise 콜백은 마이크로태스크 큐, setTimeout 콜백은 태스크 큐에 들어간다&lt;/li&gt;
+&lt;li&gt;우선순위는 마이크로태스크 큐 &gt; 태스크 큐이다&lt;/li&gt;
+&lt;li&gt;마이크로태스크가 계속 쌓이면 태스크 큐가 블로킹될 수 있다&lt;/li&gt;
+&lt;/ul&gt;</content:encoded></item><item><title><![CDATA[Sticky Hover - 터치 디바이스에서 hover가 안 사라지는 문제]]></title><description><![CDATA[모바일에서 버튼이나 링크를 탭했을 때 hover 스타일이 사라지지 않고 남아있는 경우가 있다. 이를 Sticky Hover라고 하는데, 대부분 의도한 동작은 아닐 것이다. 문제 상황 마우스 환경에서는 버튼 밖으로 이동하면 hover…]]></description><link>https://thumbzzero.github.io/sticky-hover/</link><guid isPermaLink="false">https://thumbzzero.github.io/sticky-hover/</guid><pubDate>Wed, 20 May 2026 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;모바일에서 버튼이나 링크를 탭했을 때 hover 스타일이 사라지지 않고 남아있는 경우가 있다. 이를 &lt;strong&gt;Sticky Hover&lt;/strong&gt;라고 하는데, 대부분 의도한 동작은 아닐 것이다.&lt;/p&gt;
 &lt;hr&gt;
 &lt;h2&gt;문제 상황&lt;/h2&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;css&quot;&gt;&lt;pre class=&quot;language-css&quot;&gt;&lt;code class=&quot;language-css&quot;&gt;&lt;span class=&quot;token selector&quot;&gt;.button&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
@@ -184,6 +285,10 @@ controller&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span
   &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;fetch에 signal을 전달하면 해당 요청이 AbortController와 연결된다. 새로운 요청이 들어올 때마다 이전 요청을 abort()로 취소하기 때문에, 항상 마지막 요청의 결과만 화면에 반영된다.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;연속 요청 제어 패턴&lt;/h2&gt;
+&lt;p&gt;한 번 abort된 signal은 재사용할 수 없다. &lt;code class=&quot;language-text&quot;&gt;abort()&lt;/code&gt;를 호출하면 &lt;code class=&quot;language-text&quot;&gt;signal.aborted&lt;/code&gt;가 &lt;code class=&quot;language-text&quot;&gt;true&lt;/code&gt;로 고정되고, 이후 같은 signal로 fetch를 시도하면 즉시 &lt;code class=&quot;language-text&quot;&gt;AbortError&lt;/code&gt;가 발생한다.&lt;/p&gt;
+&lt;p&gt;그래서 연속 요청이 필요한 상황에서는 &lt;strong&gt;매 요청마다 새 AbortController를 생성&lt;/strong&gt;해야 한다. 위 코드에서 &lt;code class=&quot;language-text&quot;&gt;controller = new AbortController()&lt;/code&gt;를 매번 새로 만드는 것이 바로 이 이유다. 입력 필드에서 API를 반복 호출하는 구조라면 이전 요청을 취소하고 새 컨트롤러를 만드는 흐름이 기본 패턴이 된다.&lt;/p&gt;
 &lt;hr&gt;
 &lt;h2&gt;debounce와 함께 쓰기&lt;/h2&gt;
 &lt;p&gt;검색창 구현할 때는 debounce를 함께 쓰는 게 일반적이다. debounce는 타이핑이 멈춘 후 일정 시간이 지나야 API를 호출하도록 해서 &lt;strong&gt;요청 횟수 자체를 줄여주고&lt;/strong&gt;, AbortController는 이미 보낸 요청을 취소해서 &lt;strong&gt;Race Condition을 방지한다.&lt;/strong&gt; 역할이 다르기 때문에 함께 쓰면 더 안전하다.&lt;/p&gt;
