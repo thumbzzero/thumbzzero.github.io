@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkgatsby_starter_blog=self.webpackChunkgatsby_starter_blog||[]).push([[903],{9023:function(e,t,r){r.r(t);var s=r(7294);t.default=()=>{const e={}.GATSBY_RESUME_URL;return s.createElement("iframe",{src:e,title:"Resume",style:{position:"fixed",top:0,left:0,width:"100%",height:"100%",border:"none"}})}}}]);
+//# sourceMappingURL=component---src-pages-resume-js-0a596aa807483a4395f2.js.map
