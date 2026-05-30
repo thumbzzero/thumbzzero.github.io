@@ -84,7 +84,13 @@ const BlogIndex = ({ data, location }) => {
       )}
       <ol style={{ listStyle: `none` }}>
         {filteredPosts.length === 0 ? (
-          <p className="search-empty">No posts match "{query}"</p>
+          <p className="search-empty">
+            {query.trim() && selectedTags.length > 0
+              ? `No posts match "${query.trim()}" with selected tags`
+              : query.trim()
+              ? `No posts match "${query.trim()}"`
+              : `No posts match selected tags`}
+          </p>
         ) : (
           filteredPosts.map(post => {
             const title = post.frontmatter.title || post.fields.slug
