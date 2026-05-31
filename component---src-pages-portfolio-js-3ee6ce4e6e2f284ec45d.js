@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkgatsby_starter_blog=self.webpackChunkgatsby_starter_blog||[]).push([[25],{4037:function(t,e,o){o.r(e),o.d(e,{Head:function(){return l}});var r=o(7294);const l=()=>r.createElement("title",null,"포트폴리오");e.default=()=>r.createElement("iframe",{src:"https://portfolio-thumbzzeros-projects.vercel.app/portfolio",title:"Portfolio",style:{position:"fixed",top:0,left:0,width:"100%",height:"100%",border:"none"}})}}]);
+//# sourceMappingURL=component---src-pages-portfolio-js-3ee6ce4e6e2f284ec45d.js.map

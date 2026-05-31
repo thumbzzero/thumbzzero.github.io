@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkgatsby_starter_blog=self.webpackChunkgatsby_starter_blog||[]).push([[903],{9023:function(e,t,r){r.r(t),r.d(t,{Head:function(){return l}});var s=r(7294);const l=()=>s.createElement("title",null,"이력서");t.default=()=>s.createElement("iframe",{src:"https://portfolio-thumbzzeros-projects.vercel.app/resume",title:"Resume",style:{position:"fixed",top:0,left:0,width:"100%",height:"100%",border:"none"}})}}]);
+//# sourceMappingURL=component---src-pages-resume-js-a3f7f90111d1ddd54fae.js.map

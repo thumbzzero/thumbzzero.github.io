@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkgatsby_starter_blog=self.webpackChunkgatsby_starter_blog||[]).push([[25],{4037:function(t,e,o){o.r(e);var r=o(7294);e.default=()=>r.createElement("iframe",{src:"https://portfolio-thumbzzeros-projects.vercel.app/portfolio",title:"Portfolio",style:{position:"fixed",top:0,left:0,width:"100%",height:"100%",border:"none"}})}}]);
-//# sourceMappingURL=component---src-pages-portfolio-js-f2c81241af424ca08828.js.map
