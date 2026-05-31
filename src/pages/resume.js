@@ -19,4 +19,6 @@ const ResumePage = () => {
   )
 }
 
+export const Head = () => <title>이력서</title>
+
 export default ResumePage

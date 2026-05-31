@@ -19,4 +19,6 @@ const PortfolioPage = () => {
   )
 }
 
+export const Head = () => <title>포트폴리오</title>
+
 export default PortfolioPage
