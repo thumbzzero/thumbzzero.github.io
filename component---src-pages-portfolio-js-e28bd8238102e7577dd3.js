@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkgatsby_starter_blog=self.webpackChunkgatsby_starter_blog||[]).push([[25],{4037:function(t,e,r){r.r(e);var s=r(7294);e.default=()=>{const t={}.GATSBY_PORTFOLIO_URL;return s.createElement("iframe",{src:t,title:"Portfolio",style:{position:"fixed",top:0,left:0,width:"100%",height:"100%",border:"none"}})}}}]);
-//# sourceMappingURL=component---src-pages-portfolio-js-e28bd8238102e7577dd3.js.map
