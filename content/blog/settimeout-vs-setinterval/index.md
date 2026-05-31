@@ -1,7 +1,7 @@
 ---
 title: "setTimeout vs setInterval"
 date: "2026-05-30"
-description: "setInterval과 setTimeout의 차이, 비동기 작업에서 올바르게 사용하는 법"
+description: "setTimeout과 setInterval의 차이, 비동기 작업에서 올바르게 사용하는 법"
 tags: ["JavaScript"]
 ---
 
