@@ -223,6 +223,12 @@ table {
 
 table thead tr th {
   border-bottom: 1px solid var(--color-accent);
+  text-align: left;
+  padding: var(--spacing-2) var(--spacing-3);
+}
+
+table tbody tr td {
+  padding: var(--spacing-2) var(--spacing-3);
 }
 
 /* Link */
