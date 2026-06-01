@@ -5,6 +5,16 @@ import Bio from "../components/bio"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 
+const highlight = (text, query) => {
+  if (!text || !query.trim()) return text
+  const parts = text.split(new RegExp(`(${query.trim().replace(/[.*+?^${}()|[\]\\]/g, "\\$&")})`, "gi"))
+  return parts.map((part, i) =>
+    part.toLowerCase() === query.trim().toLowerCase()
+      ? <strong key={i} className="search-highlight">{part}</strong>
+      : part
+  )
+}
+
 const BlogIndex = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata?.title || `Title`
   const posts = data.allMarkdownRemark.nodes
@@ -105,7 +115,7 @@ const BlogIndex = ({ data, location }) => {
                   <header>
                     <h2>
                       <Link to={post.fields.slug} itemProp="url">
-                        <span itemProp="headline">{title}</span>
+                        <span itemProp="headline">{highlight(title, query)}</span>
                       </Link>
                     </h2>
                     <small>{post.frontmatter.date}</small>
@@ -127,12 +137,9 @@ const BlogIndex = ({ data, location }) => {
                     )}
                   </header>
                   <section>
-                    <p
-                      dangerouslySetInnerHTML={{
-                        __html: post.frontmatter.description || post.excerpt,
-                      }}
-                      itemProp="description"
-                    />
+                    <p itemProp="description">
+                      {highlight(post.frontmatter.description || post.excerpt, query)}
+                    </p>
                   </section>
                 </article>
               </li>
