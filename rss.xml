@@ -1,4 +1,94 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Blog RSS Feed]]></title><description><![CDATA[개발 기록]]></description><link>https://thumbzzero.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Sat, 06 Jun 2026 09:26:07 GMT</lastBuildDate><item><title><![CDATA[이벤트 위임]]></title><description><![CDATA[리스트 아이템 100개에 각각 클릭 이벤트를 달아야 한다고 해보자. 아이템마다 이벤트 리스너를 하나씩 붙이는 것보다 더 나은 방법이 있다. 바로 이벤트 위임이다. 이벤트 버블링 이벤트 위임을 이해하려면 이벤트 버블링을 알아야 한다. DOM…]]></description><link>https://thumbzzero.github.io/event-delegation/</link><guid isPermaLink="false">https://thumbzzero.github.io/event-delegation/</guid><pubDate>Sat, 06 Jun 2026 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;리스트 아이템 100개에 각각 클릭 이벤트를 달아야 한다고 해보자. 아이템마다 이벤트 리스너를 하나씩 붙이는 것보다 더 나은 방법이 있다. 바로 &lt;strong&gt;이벤트 위임&lt;/strong&gt;이다.&lt;/p&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Blog RSS Feed]]></title><description><![CDATA[개발 기록]]></description><link>https://thumbzzero.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Sun, 07 Jun 2026 07:33:15 GMT</lastBuildDate><item><title><![CDATA[clamp()로 반응형 디자인 구현하기]]></title><description><![CDATA[…]]></description><link>https://thumbzzero.github.io/clamp/</link><guid isPermaLink="false">https://thumbzzero.github.io/clamp/</guid><pubDate>Sun, 07 Jun 2026 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;반응형 디자인을 구현할 때 보통 미디어 쿼리로 브레이크포인트마다 &lt;code class=&quot;language-text&quot;&gt;px&lt;/code&gt; 값을 지정하는 방식을 많이 쓴다. 근데 이 방법은 브레이크포인트 사이에서 값이 뚝뚝 끊기고, 미디어 쿼리가 많아질수록 관리가 힘들어진다. &lt;code class=&quot;language-text&quot;&gt;clamp()&lt;/code&gt;를 쓰면 이 문제를 깔끔하게 해결할 수 있다.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;clamp()&lt;/h2&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;clamp(min, val, max)&lt;/code&gt; 형태로 사용한다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;css&quot;&gt;&lt;pre class=&quot;language-css&quot;&gt;&lt;code class=&quot;language-css&quot;&gt;&lt;span class=&quot;token selector&quot;&gt;.title&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;font-size&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;clamp&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;1rem&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; 2.5vw&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; 2rem&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;min (최솟값)&lt;/strong&gt;: 허용되는 값의 하한선. 만약 선호값(val)이 이 최솟값보다 작아지면, clamp() 함수는 최솟값을 최종 결과로 사용한다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;val (선호값)&lt;/strong&gt;: 결과가 최솟값과 최댓값 사이에 있는 동안에 기본적으로 사용되는 표현식. 보통 vw, % 같은 가변 단위를 자주 사용한다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;max (최댓값)&lt;/strong&gt;: 허용되는 값의 상한선. 선호값(val)이 이 최댓값보다 커지면, clamp() 함수는 최댓값을 최종 결과로 사용한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;선호값을 기준으로 동작하되, 최솟값보다 작아지거나 최댓값보다 커지지 않도록 제한한다.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/clamp&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;mdn 문서&lt;/a&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;미디어 쿼리와 비교&lt;/h2&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;css&quot;&gt;&lt;pre class=&quot;language-css&quot;&gt;&lt;code class=&quot;language-css&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;/* 미디어 쿼리 방식 - 브레이크포인트 사이에서 값이 뚝 끊김 */&lt;/span&gt;
+&lt;span class=&quot;token selector&quot;&gt;.title&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;font-size&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; 1rem&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token atrule&quot;&gt;&lt;span class=&quot;token rule&quot;&gt;@media&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token property&quot;&gt;min-width&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; 768px&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token selector&quot;&gt;.title&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token property&quot;&gt;font-size&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; 1.5rem&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token atrule&quot;&gt;&lt;span class=&quot;token rule&quot;&gt;@media&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token property&quot;&gt;min-width&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; 1200px&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token selector&quot;&gt;.title&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token property&quot;&gt;font-size&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; 2rem&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token comment&quot;&gt;/* clamp() 방식 */&lt;/span&gt;
+&lt;span class=&quot;token selector&quot;&gt;.title&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;font-size&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;clamp&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;1rem&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; 2.5vw&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; 2rem&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;hr&gt;
+&lt;h2&gt;선호값 계산하기&lt;/h2&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;clamp()&lt;/code&gt;에서 가장 헷갈리는 부분이 선호값이다. &lt;code class=&quot;language-text&quot;&gt;2.5vw&lt;/code&gt;처럼 감으로 넣기보다 원하는 시작점과 끝점을 기준으로 계산하는 방법이 있다.&lt;/p&gt;
+&lt;p&gt;예를 들어 &lt;strong&gt;뷰포트 375px일 때 1rem, 1200px일 때 2rem&lt;/strong&gt;으로 스케일링하고 싶다면 아래 공식을 쓰면 된다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;선호값 = calc((기울기 * 100vw) + 상수)
+---------------------------------------------
+기울기 = (최댓값 - 최솟값) / (최대뷰포트 - 최소뷰포트)
+상수(y절편) = 최솟값 - (최소뷰포트 * 기울기)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;css&quot;&gt;&lt;pre class=&quot;language-css&quot;&gt;&lt;code class=&quot;language-css&quot;&gt;&lt;span class=&quot;token property&quot;&gt;font-size&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;clamp&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;1rem&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;calc&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;1.94vw + 0.55rem&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; 2rem&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;직접 계산하기 번거로우면 &lt;a href=&quot;https://pxtovw.co.kr/clamp-generator.html&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;CSS Clamp 생성기&lt;/a&gt; 같은 사이트를 활용하는 것도 좋다.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;웹 접근성(Accessibility) 관련 주의점&lt;/h2&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;font-size&lt;/code&gt;에 &lt;code class=&quot;language-text&quot;&gt;clamp()&lt;/code&gt;를 쓸 때는 웹 접근성을 위해 아래 두 가지를 참고하여 설정하는 것이 좋다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;(1) 선호값에 rem 섞기&lt;/strong&gt;&lt;br&gt;
+선호값에 &lt;code class=&quot;language-text&quot;&gt;2.5vw&lt;/code&gt;처럼 가변 단위만 단독으로 쓰면 브라우저를 확대(Zoom)해도 글자 크기가 커지지 않으므로 &lt;code class=&quot;language-text&quot;&gt;rem&lt;/code&gt;과 &lt;code class=&quot;language-text&quot;&gt;vw&lt;/code&gt;가 섞인 &lt;code class=&quot;language-text&quot;&gt;calc()&lt;/code&gt; 형태를 쓰는 것이 좋다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;(2) 최댓값은 최솟값의 2배 이상인 상대 단위로 설정하기&lt;/strong&gt;&lt;br&gt;
+텍스트는 최소 200%까지 확대될 수 있도록 &lt;code class=&quot;language-text&quot;&gt;clamp()&lt;/code&gt;의 최댓값(max)은 최솟값(min)의 2배 이상이 되도록 잡는 게 좋다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;css&quot;&gt;&lt;pre class=&quot;language-css&quot;&gt;&lt;code class=&quot;language-css&quot;&gt;&lt;span class=&quot;token selector&quot;&gt;.title&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;font-size&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;clamp&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;1rem&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;calc&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;1.5vw + 0.7rem&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; 2rem&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; 
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;hr&gt;
+&lt;h2&gt;사용 가능한 CSS 속성&lt;/h2&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;clamp()&lt;/code&gt;는 폰트 크기뿐만 아니라 &lt;code class=&quot;language-text&quot;&gt;width&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;padding&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;margin&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;gap&lt;/code&gt; 등 크기를 다루는 곳이면 어디든 쓸 수 있다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;css&quot;&gt;&lt;pre class=&quot;language-css&quot;&gt;&lt;code class=&quot;language-css&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;/* 패딩 */&lt;/span&gt;
+&lt;span class=&quot;token selector&quot;&gt;.container&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;padding&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;clamp&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;1rem&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; 5vw&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; 3rem&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token comment&quot;&gt;/* 너비 */&lt;/span&gt;
+&lt;span class=&quot;token selector&quot;&gt;.card&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;clamp&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;280px&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; 50%&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; 600px&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token comment&quot;&gt;/* 간격 */&lt;/span&gt;
+&lt;span class=&quot;token selector&quot;&gt;.grid&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;gap&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;clamp&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;1rem&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; 3vw&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; 2rem&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;hr&gt;
+&lt;h2&gt;min(), max()&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;min(a, b)&lt;/code&gt; → 둘 중 &lt;strong&gt;작은&lt;/strong&gt; 값 선택&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;max(a, b)&lt;/code&gt; → 둘 중 &lt;strong&gt;큰&lt;/strong&gt; 값 선택&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;css&quot;&gt;&lt;pre class=&quot;language-css&quot;&gt;&lt;code class=&quot;language-css&quot;&gt;&lt;span class=&quot;token selector&quot;&gt;.container&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;min&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;1200px&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; 100%&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token selector&quot;&gt;.button&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;max&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;44px&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; 3rem&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;사실 &lt;code class=&quot;language-text&quot;&gt;clamp(min, val, max)&lt;/code&gt;는 &lt;code class=&quot;language-text&quot;&gt;max(min, min(val, max))&lt;/code&gt;와 동일하다. &lt;code class=&quot;language-text&quot;&gt;min()&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;max()&lt;/code&gt;를 조합한 것이 &lt;code class=&quot;language-text&quot;&gt;clamp()&lt;/code&gt;인 셈이다.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;브라우저 지원&lt;/h2&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;clamp()&lt;/code&gt;는 모던 브라우저에서 모두 지원한다. IE는 지원하지 않지만, IE를 지원할 일이 없다면 걱정 없이 써도 된다😄&lt;/p&gt;</content:encoded></item><item><title><![CDATA[이벤트 위임]]></title><description><![CDATA[리스트 아이템 100개에 각각 클릭 이벤트를 달아야 한다고 해보자. 아이템마다 이벤트 리스너를 하나씩 붙이는 것보다 더 나은 방법이 있다. 바로 이벤트 위임이다. 이벤트 버블링 이벤트 위임을 이해하려면 이벤트 버블링을 알아야 한다. DOM…]]></description><link>https://thumbzzero.github.io/event-delegation/</link><guid isPermaLink="false">https://thumbzzero.github.io/event-delegation/</guid><pubDate>Sat, 06 Jun 2026 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;리스트 아이템 100개에 각각 클릭 이벤트를 달아야 한다고 해보자. 아이템마다 이벤트 리스너를 하나씩 붙이는 것보다 더 나은 방법이 있다. 바로 &lt;strong&gt;이벤트 위임&lt;/strong&gt;이다.&lt;/p&gt;
 &lt;hr&gt;
 &lt;h2&gt;이벤트 버블링&lt;/h2&gt;
 &lt;p&gt;이벤트 위임을 이해하려면 &lt;strong&gt;이벤트 버블링&lt;/strong&gt;을 알아야 한다.&lt;/p&gt;
