@@ -1,7 +1,7 @@
 ---
 title: "z-index가 예상대로 작동하지 않는 원인: stacking context"
 date: "2026-06-05"
-description: "stacking context의 생성 조건과 동작 원리"
+description: "z-index가 예상대로 작동하지 않게 하는 stacking context의 생성 조건과 동작 원리"
 tags: ["CSS", "Browser", "Debugging"]
 ---
 
