@@ -42,16 +42,14 @@ stacking context가 생기는 대표적인 경우는 아래와 같다.
 ## 예시 1
 
 ```html
-<div class="A">  <!-- z-index: 1 -->
-  <div class="A-child">  <!-- z-index: 999 -->
-    A-child
-  </div>
+<div class="A">
+  A / z-index: 1
+  <div class="A-child">A-child<br>z-index: 999</div>
 </div>
 
-<div class="B">  <!-- z-index: 2 -->
-  <div class="B-child">  <!-- z-index: 1 -->
-    B-child
-  </div>
+<div class="B">
+  B / z-index: 2
+  <div class="B-child">B-child<br>z-index: 1</div>
 </div>
 ```
 
@@ -97,6 +95,26 @@ stacking context가 생기는 대표적인 경우는 아래와 같다.
 }
 ```
 
+<div style="border: 1px solid #e0e0e0; border-radius: 8px; padding: 24px; margin: 24px 0; background: #fafafa;">
+  <style>
+    .sc1-scene { position: relative; width: 250px; height: 250px; margin: 0 auto; }
+    .sc1-A { position: absolute; top: 0; left: 0; width: 200px; height: 200px; background-color: lightblue; z-index: 1; }
+    .sc1-B { position: absolute; top: 50px; left: 50px; width: 200px; height: 200px; background-color: lightgreen; z-index: 2; }
+    .sc1-Achild { position: absolute; top: 50px; left: 50px; width: 100px; height: 100px; background-color: slateblue; z-index: 999; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; color: white; text-align: center; line-height: 1.5; }
+    .sc1-Bchild { position: absolute; top: 50px; left: 50px; width: 100px; height: 100px; background-color: yellow; z-index: 1; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; color: #555; text-align: center; line-height: 1.5; }
+  </style>
+  <div class="sc1-scene">
+    <div class="sc1-A">
+      <span style="font-size:11px;font-weight:bold;padding:3px 6px;display:block;">A / z-index: 1</span>
+      <div class="sc1-Achild">A-child<br>z-index: 999</div>
+    </div>
+    <div class="sc1-B">
+      <span style="font-size:11px;font-weight:bold;padding:3px 6px;display:block;">B / z-index: 2</span>
+      <div class="sc1-Bchild">B-child<br>z-index: 1</div>
+    </div>
+  </div>
+</div>
+
 `A-child`의 z-index가 999임에도 불구하고 `B-child`(z-index: 1) 보다 뒤에 있다.
 
 `A`와 `B`가 각각 stacking context를 만들기 때문에, `A-child`와 `B-child`의 z-index는 서로 비교되지 않는다. `A(z-index: 1)`와 `B(z-index: 2)`가 먼저 비교되고, `A`가 뒤에 있기 때문에 그 안의 `A-child`도 무조건 뒤에 있을 수밖에 없다.
@@ -118,6 +136,22 @@ stacking context가 생기는 대표적인 경우는 아래와 같다.
   z-index: 9999; 
 }
 ```
+
+<div style="border: 1px solid #e0e0e0; border-radius: 8px; padding: 24px 24px 16px; margin: 24px 0; background: #fafafa;">
+  <style>
+    .sc2-scene { position: relative; width: 320px; height: 200px; margin: 0 auto; }
+    .sc2-parent { position: absolute; top: 20px; left: 10px; width: 180px; height: 160px; background: lightblue; opacity: 0.9; }
+    .sc2-child { position: absolute; top: 30px; left: 20px; width: 140px; height: 100px; z-index: 9999; background: slateblue; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; color: white; text-align: center; line-height: 1.5; }
+    .sc2-overlay { position: absolute; top: 40px; left: 140px; width: 170px; height: 120px; z-index: 1; background: lightgreen; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; color: #333; text-align: center; line-height: 1.5; }
+  </style>
+  <div class="sc2-scene">
+    <div class="sc2-parent">
+      <span style="font-size:11px;font-weight:bold;padding:4px 6px;display:block;">parent / opacity: 0.9</span>
+      <div class="sc2-child">child<br>z-index: 9999</div>
+    </div>
+    <div class="sc2-overlay">외부 요소<br>z-index: 1</div>
+  </div>
+</div>
 
 부모 요소에 디자인 효과를 주다가 stacking context가 생성되어 자식의 z-index가 먹통이 될 수 있다.
 
